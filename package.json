@@ -2,10 +2,10 @@
   "name": "dev-book-meneger-ts",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "start": "vite build",
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
