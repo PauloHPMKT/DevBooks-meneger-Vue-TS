@@ -1,8 +1,13 @@
-html,
-body {
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;800;900&display=swap);
+
+* {
 	position: relative;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
 
+html, body {
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	font-size: $default-font-size;
 }
