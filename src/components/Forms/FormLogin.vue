@@ -8,7 +8,11 @@
 		<div class="input-style">
 			<input id="email" type="password" placeholder="**********" />
 		</div>
-		<MainButton class="btn-style-success" :title_btn="'Login'"/>
+		<MainButton
+			type="submit"
+			:title_btn="'Login'"
+			class="btn-style-success"
+		/>
 	</form>
 </template>
 
