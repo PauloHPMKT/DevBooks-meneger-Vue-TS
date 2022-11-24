@@ -20,3 +20,10 @@ export default defineComponent({
 	},
 })
 </script>
+
+<style>
+svg {
+	display: flex;
+	cursor: pointer;
+}
+</style>
