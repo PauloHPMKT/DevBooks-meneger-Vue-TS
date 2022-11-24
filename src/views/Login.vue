@@ -10,8 +10,8 @@
             <h1>Gerenciador de plataforma</h1>
             <p>Acesse seu ambiente de gestão da plataforma DevBooks</p>
           </div>
-          <!--<form-login @handleLogin="submitLogin"/>
-          <information-popup
+					<FormLogin />
+          <!--<information-popup
             v-if="toastMessageHidden"
             :message_data="message"
            />-->
@@ -22,9 +22,11 @@
 </template>
 
 <script lang="ts">
+import FormLogin from '@/components/Forms/FormLogin.vue';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'Login',
+	name: "Login",
+	components: { FormLogin }
 })
 </script>

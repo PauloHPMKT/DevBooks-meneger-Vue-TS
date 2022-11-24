@@ -1,0 +1,22 @@
+.btn {
+	padding: 10px 18px;
+	font-size: $default-font-size;
+	border: 1px solid $gray-tone;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+//success btn viriant
+.btn-style-success {
+	background-color: #009acc;
+	color: $white-color;
+	font-weight: 500;
+	text-transform: uppercase;
+	border: 1px solid #009acc;
+	padding: 12px 25px;
+	transition: .4s ease;
+
+	&:hover {
+		background-color: #077da5;
+	}
+}

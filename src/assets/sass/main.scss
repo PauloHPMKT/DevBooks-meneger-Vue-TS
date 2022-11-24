@@ -3,5 +3,9 @@
 @import '../sass/base';
 @import '../sass/mixins/default-styles/mixins';
 
+//components structure
+@import '../sass/components/inputs/input-style.scss';
+@import '../sass/components/buttons/main-button.scss';
+
 //pages structure
 @import '../sass/pages/login.scss';
