@@ -1,6 +1,6 @@
 <template>
 	<div>
-		Dashboard
+		Sidebar
 	</div>
 </template>
 
@@ -8,6 +8,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'Overview',
+	name: 'SideBar',
 })
 </script>

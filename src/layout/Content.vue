@@ -1,13 +1,13 @@
 <template>
-	<div>
-		Dashboard
-	</div>
+	<transition >
+		<RouterView />
+	</transition>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'Overview',
+	name: 'Content',
 })
 </script>
