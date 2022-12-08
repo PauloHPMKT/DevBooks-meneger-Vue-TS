@@ -1,13 +1,12 @@
 <template>
-	<div class="sidebar-container">
-		Sidebar
+	<div>
+		Cabecalho
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 export default defineComponent({
-	name: 'SideBar',
+	name: 'Header',
 })
 </script>
