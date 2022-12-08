@@ -1,6 +1,6 @@
 <template>
 	<div>
-		Componente de dashboard ueepa
+		<RouterView />
 	</div>
 </template>
 
@@ -8,6 +8,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'DashboardLayout',
+	name: 'Overview',
 })
 </script>
