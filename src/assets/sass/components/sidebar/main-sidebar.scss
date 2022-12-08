@@ -1,3 +1,25 @@
-.sidebar-container {
+.sidebar {
 	width: 15%;
+	padding: 10px;
+	height: 100vh;
+
+	&__container  {
+		background-image: linear-gradient(to right, #121212, #2e2e2e);
+		height: 100%;
+		border-radius: 12px;
+		padding: 20px;
+		filter: drop-shadow(-2px 2px 5px $default-shadow)
+
+	}
+
+	&--logo-container {
+		@include alignment-items(flex, center, center);
+		padding: 10px 0 28px;
+		border-bottom: 2px solid #333;
+
+		img {
+			width: 170px;
+			filter: drop-shadow(0 0 1px #fff);
+		}
+	}
 }
