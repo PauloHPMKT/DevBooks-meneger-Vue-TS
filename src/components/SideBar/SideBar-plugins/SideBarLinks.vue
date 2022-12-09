@@ -1,0 +1,31 @@
+<template>
+	<div class="links">
+		<nav>
+			<ul>
+				<li v-for="link in dataLinks" :key="link.id">
+					<router-link :to="{ path: `${link.router}` }">
+						<Icon :icon="`carbon:${link.icon}`" />
+						<p>{{ link.description }}</p>
+					</router-link>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { Icon } from '@iconify/vue'
+
+import routerLinks from '@/contants/router-links'
+
+export default defineComponent({
+	name: 'SideBarLinks',
+	components: { Icon },
+	data() {
+		return {
+			dataLinks: routerLinks,
+		}
+	}
+})
+</script>
