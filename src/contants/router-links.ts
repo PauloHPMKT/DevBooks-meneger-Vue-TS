@@ -1,7 +1,7 @@
 export default [
 	{
 		id: 0,
-		router: '/app/overview',
+		router: '/app/dashboard',
 		icon: 'chart-combo-stacked',
 		description: 'Dashboard',
 	},
@@ -20,13 +20,13 @@ export default [
 	{
 		id: 3,
 		router: '/app/comments',
-		icon: 'comment',
+		icon: 'add-comment',
 		description: 'Comentários',
 	},
 	{
 		id: 4,
 		router: '/app/sessions',
-		icon: 'clock',
+		icon: 'report',
 		description: 'Sessões',
 	},
 ]

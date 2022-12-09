@@ -1,7 +1,7 @@
 <template>
 	<div class="links">
 		<nav>
-			<ul>
+			<ul class="links__navigation">
 				<li v-for="link in dataLinks" :key="link.id">
 					<router-link :to="{ path: `${link.router}` }">
 						<Icon :icon="`carbon:${link.icon}`" />
@@ -14,18 +14,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { Icon } from '@iconify/vue'
+import { defineComponent } from "vue";
+import { Icon } from "@iconify/vue";
 
-import routerLinks from '@/contants/router-links'
+import routerLinks from "@/contants/router-links";
 
 export default defineComponent({
-	name: 'SideBarLinks',
+	name: "SideBarLinks",
 	components: { Icon },
 	data() {
 		return {
 			dataLinks: routerLinks,
-		}
-	}
-})
+		};
+	},
+});
 </script>
