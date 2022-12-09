@@ -1,0 +1,9 @@
+.header {
+	background-color: red;
+	@include alignment-items(flex, space-between, center);
+	padding: 10px 20px;
+
+	&--gretting {
+		margin-bottom: 5px;
+	}
+}
