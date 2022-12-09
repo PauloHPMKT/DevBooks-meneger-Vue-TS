@@ -23,7 +23,27 @@ const router = createRouter({
 					path:	'dashboard',
 					name: 'Dashboard',
 					component: () => import('../views/user/Overview.vue'),
-				}
+				},
+				{
+					path:	'users',
+					name: 'Users',
+					component: () => import('../views/user/UserReports.vue'),
+				},
+				{
+					path:	'books',
+					name: 'Books',
+					component: () => import('../views/user/BooksReports.vue'),
+				},
+				{
+					path:	'comments',
+					name: 'Comments',
+					component: () => import('../views/user/CommentsReports.vue'),
+				},
+				{
+					path:	'sessions',
+					name: 'Sessions',
+					component: () => import('../views/user/LogsReports.vue'),
+				},
 			]
 		},
   ]
