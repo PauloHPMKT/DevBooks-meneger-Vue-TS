@@ -11,7 +11,7 @@
             <p>Acesse seu ambiente de gestão da plataforma DevBooks</p>
           </div>
 					<FormLogin
-						@handleSubmit="login"
+						@handleSubmit="submitLogin"
 					/>
         </div>
       </div>
@@ -27,7 +27,7 @@ export default defineComponent({
 	name: "Login",
 	components: { FormLogin },
 	methods: {
-		login(user: object) {
+		submitLogin(user: object) {
 			this.$store.dispatch('userStore/login', user)
 		}
 	},

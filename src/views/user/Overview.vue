@@ -26,18 +26,22 @@
 </template>
 
 <script lang="ts">
-import CardMessure from '@/components/DashboardComponents/CardMessure.vue'
-import { defineComponent } from 'vue'
+import CardMessure from "@/components/DashboardComponents/CardMessure.vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: "Overview",
-    components: { CardMessure },
-		data() {
-			return {
-				quantityUser: 290,
-				quantityBooks: 476,
-				quantityComments: 851,
-			}
-		}
-})
+	name: "Overview",
+	components: { CardMessure },
+	data() {
+		return {
+			quantityUser: 290,
+			quantityBooks: 476,
+			quantityComments: 851,
+		};
+	},
+
+	mounted() {
+		console.log(this.$store.state.userStore)
+	}
+});
 </script>
