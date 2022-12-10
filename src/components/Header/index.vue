@@ -8,15 +8,26 @@
 				<strong>Dashboard</strong>
 			</div>
 		</div>
-		<div>
-			botoes de comando
+		<div class="header__infos--commands">
+			<div :title="user_message">
+				<Icon icon="carbon:user-avatar-filled" />
+				<span>Meu painel</span>
+			</div>
 		</div>
 	</header>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { Icon } from '@iconify/vue'
+
 export default defineComponent({
 	name: 'Header',
+	components: { Icon },
+	data() {
+		return {
+			user_message: `Clique aqui para acessar suas configuracoes`
+		}
+	}
 })
 </script>
