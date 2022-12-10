@@ -3,7 +3,6 @@ import jwtDecode from 'jwt-decode'
 
 export default {
 	async login(context: any, data: object) {
-    console.log(data)
     await userServices.login(data).then(res => {
       console.log(res.data);
       const validToken = res.data.access_token
@@ -15,7 +14,7 @@ export default {
 
         context.commit('LOGIN', decode)
 
-        //location.replace('/app/admin')
+        location.replace('/app/dashboard')
       }
     })
   }
