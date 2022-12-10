@@ -3,9 +3,9 @@
 		<SideBar />
 		<div class="main-painel">
 			<Header />
-			<div>
+			<main>
 				<Content />
-			</div>
+			</main>
 			<Footer />
 		</div>
 	</div>
