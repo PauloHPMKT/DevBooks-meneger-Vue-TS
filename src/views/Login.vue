@@ -10,11 +10,9 @@
             <h1>Gerenciador de plataforma</h1>
             <p>Acesse seu ambiente de gestão da plataforma DevBooks</p>
           </div>
-					<FormLogin />
-          <!--<information-popup
-            v-if="toastMessageHidden"
-            :message_data="message"
-           />-->
+					<FormLogin
+						@handleSubmit="login"
+					/>
         </div>
       </div>
     </main>
@@ -27,7 +25,12 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: "Login",
-	components: { FormLogin }
+	components: { FormLogin },
+	methods: {
+		login(user: object) {
+			this.$store.dispatch('userStore/login', user)
+		}
+	},
 })
 </script>
 

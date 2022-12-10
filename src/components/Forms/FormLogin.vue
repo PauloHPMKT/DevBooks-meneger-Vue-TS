@@ -1,12 +1,22 @@
 <template>
-	<form @submit.prevent="teste">
+	<form @submit.prevent="$emit('handleSubmit', user)">
 		<label for="email">E-mail</label>
 		<div class="input-style">
-			<input id="email" type="text" placeholder="meuemail@devbooks.com" />
+			<input
+				id="email"
+				type="text"
+				v-model="user.email"
+				placeholder="meuemail@devbooks.com"
+			/>
 		</div>
 		<label for="password">Senha</label>
 		<div class="input-style">
-			<input id="email" :type="inputType" placeholder="**********" />
+			<input
+				id="password"
+				:type="inputType"
+				v-model="user.password"
+				placeholder="**********"
+			/>
 			<PasswordRevelling
 				@toggle="togglePassword"
 				:isPassword="isPasswordVisible"
@@ -27,6 +37,8 @@ import PasswordRevelling from "../Icons/PasswordRevelling.vue";
 
 export default defineComponent({
 	name: "FormLogin",
+	components: { MainButton, PasswordRevelling },
+	emits: ['handleSubmit'],
 	data() {
 		return {
 			inputType: 'password',
@@ -46,11 +58,6 @@ export default defineComponent({
 		togglePassword() {
 			this.inputType = this.isPasswordVisible ? 'password' : 'text'
 		},
-
-		teste() {
-			alert("ok");
-		},
 	},
-	components: { MainButton, PasswordRevelling },
 });
 </script>
