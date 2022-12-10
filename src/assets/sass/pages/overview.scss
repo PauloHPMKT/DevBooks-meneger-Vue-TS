@@ -1,0 +1,8 @@
+.overview {
+	padding: 20px 10px;
+
+	&__header-messure {
+		@include alignment-items(flex, space-between, center);
+	}
+}
+

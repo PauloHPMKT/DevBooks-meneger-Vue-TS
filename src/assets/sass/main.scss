@@ -2,15 +2,16 @@
 @import '../sass/variables';
 @import '../sass/base';
 @import '../sass/mixins/default-styles/mixins';
-@import '../sass/components/layout/template-styles.scss';
+@import '../sass/components/layout/dashboard.scss';
 
 //components structure
 @import '../sass/components/inputs/input-style.scss';
 @import '../sass/components/buttons/main-button.scss';
-@import '../sass/components/layout/dashboard.scss';
 @import '../sass/components/sidebar/main-sidebar.scss';
 @import '../sass/components/sidebar/sidebar-links.scss';
 @import '../sass/components/header/main-header.scss';
+@import '../sass/components/cards/card-messure.scss';
 
 //pages structure
 @import '../sass/pages/login.scss';
+@import '../sass/pages/overview.scss';
