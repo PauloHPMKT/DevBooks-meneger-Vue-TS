@@ -2,7 +2,7 @@
 	<header class="header">
 		<div class="header__infos">
 			<div class="header--gretting">
-				Seja bem vindo <strong>Nome do Usuário</strong>
+				Seja bem vindo(a) <strong>{{ $store.state.userStore.userName.split(' ').slice(0, 2).toString().replace(',', ' ') }}</strong>
 			</div>
 			<div>
 				<strong>Dashboard</strong>
