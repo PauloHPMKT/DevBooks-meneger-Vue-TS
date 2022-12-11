@@ -9,10 +9,11 @@
 			</div>
 		</div>
 		<div class="header__infos--commands">
-			<div :title="user_message">
+			<div @click="isCardActive" :title="user_message">
 				<Icon icon="carbon:user-avatar-filled" />
 				<span>Meu painel</span>
 			</div>
+			<ProfileCard />
 		</div>
 	</header>
 </template>
@@ -21,12 +22,19 @@
 import { defineComponent } from 'vue'
 import { Icon } from '@iconify/vue'
 
+import ProfileCard from '@/components/Cards/ProfileCard.vue'
+
 export default defineComponent({
 	name: 'Header',
-	components: { Icon },
+	components: { Icon, ProfileCard },
 	data() {
 		return {
 			user_message: `Clique aqui para acessar suas configuracoes`
+		}
+	},
+	methods: {
+		isCardActive() {
+			alert('teste')
 		}
 	}
 })
