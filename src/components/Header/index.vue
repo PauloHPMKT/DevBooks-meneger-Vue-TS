@@ -13,7 +13,7 @@
 				<Icon icon="carbon:user-avatar-filled" />
 				<span>Meu painel</span>
 			</div>
-			<ProfileCard />
+			<ProfileCard @hiddenProfileCard="hiddenCard" :class="{ 'isActive': setProfileCard }"/>
 		</div>
 	</header>
 </template>
@@ -29,12 +29,16 @@ export default defineComponent({
 	components: { Icon, ProfileCard },
 	data() {
 		return {
-			user_message: `Clique aqui para acessar suas configuracoes`
+			user_message: `Clique aqui para acessar suas configuracoes`,
+			setProfileCard: false,
 		}
 	},
 	methods: {
-		isCardActive() {
-			alert('teste')
+		isCardActive(): void {
+			this.setProfileCard = true
+		},
+		hiddenCard()  {
+			this.setProfileCard = false
 		}
 	}
 })

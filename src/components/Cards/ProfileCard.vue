@@ -1,6 +1,6 @@
 <template>
 	<div class="card-profile">
-		<Icon icon="carbon:close" />
+		<Icon icon="carbon:close" @click="$emit('hiddenProfileCard')" />
 		<div>
 			<strong>clique aqui para recolher o menu</strong>
 			Card do perfil do usuario"
@@ -16,11 +16,16 @@ import { Icon } from "@iconify/vue";
 export default defineComponent({
 	name: "CardProfile",
 	components: { Icon },
+	emits: ['hiddenProfileCard'],
 	methods: {
 		handleLogout() {
 			localStorage.clear();
 			this.$router.push("/login");
 		},
+
+		alerta() {
+			alert('ueepa')
+		}
 	},
 });
 </script>
