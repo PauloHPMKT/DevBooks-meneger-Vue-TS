@@ -1,9 +1,6 @@
 <template>
 	<div>
 		<h3>pagina de livros</h3>
-		<ul>
-			<li>teste</li>
-		</ul>
 	</div>
 </template>
 
@@ -22,7 +19,8 @@ export default defineComponent({
 	methods: {
 		async getAllBooks(): Promise<void> {
 			await bookServices.getBooks().then((res) => {
-				console.log(res);
+				this.books = res.data.books;
+				console.log(this.books);
 			});
 		},
 	},
