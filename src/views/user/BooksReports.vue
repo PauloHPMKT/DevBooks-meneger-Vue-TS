@@ -14,5 +14,9 @@ export default defineComponent({
 			books: [],
 		};
 	},
+
+	mounted() {
+		console.log(this.$store.state);
+	},
 });
 </script>
