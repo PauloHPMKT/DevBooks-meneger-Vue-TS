@@ -1,5 +1,14 @@
 <template>
-	<div>
+	<div class="overview">
+		<div class="overview__search-bar">
+			<div>
+				<input type="text" placeholder="" />
+			</div>
+			<div>
+				<MainButton :title_btn="'Pesquisar'" />
+				<MainButton :title_btn="'Adicionar novo livro'" />
+			</div>
+		</div>
 		<h3>pagina de livros</h3>
 		<ul>
 			<li v-for="book in books" :key="book._id">
@@ -20,11 +29,13 @@
 </template>
 
 <script lang="ts">
+import MainButton from "@/components/Buttons/MainButton.vue";
 import { defineComponent } from "vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "BooksReports",
+	components: { MainButton },
 	data() {
 		return {
 			books: this.$store.state.bookStore.Books,
@@ -34,16 +45,22 @@ export default defineComponent({
 			imagePath: HOST_URI,
 		};
 	},
-
 	methods: {
 		async getAllBooks() {
 			await this.$store.dispatch("bookStore/getBooks", this.books);
 		},
 	},
-
 	mounted() {
 		this.getAllBooks();
 		console.log(this.$store.state.bookStore.Books);
 	},
 });
 </script>
+
+<style lang="scss">
+.overview__search-bar {
+	background: red;
+	display: flex;
+	align-items: center;
+}
+</style>
