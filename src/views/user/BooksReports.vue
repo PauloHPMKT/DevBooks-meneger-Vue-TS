@@ -2,7 +2,7 @@
 	<div class="overview">
 		<div class="overview__search-bar">
 			<div>
-				<input type="text" placeholder="" />
+				<BaseInput placeholder="Faca aqui sua busca!" />
 			</div>
 			<div>
 				<MainButton :title_btn="'Pesquisar'" />
@@ -29,13 +29,14 @@
 </template>
 
 <script lang="ts">
-import MainButton from "@/components/Buttons/MainButton.vue";
 import { defineComponent } from "vue";
+import MainButton from "@/components/Buttons/MainButton.vue";
+import BaseInput from "@/components/Inputs/BaseInput.vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "BooksReports",
-	components: { MainButton },
+	components: { MainButton, BaseInput },
 	data() {
 		return {
 			books: this.$store.state.bookStore.Books,
