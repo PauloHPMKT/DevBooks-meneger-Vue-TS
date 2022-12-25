@@ -10,7 +10,7 @@
 						v-if="
 							book.poster.image_cover ? book.poster.image_cover : empty.poster
 						"
-						:src="`${imagePath}/${book.poster.image_cover || empty.poster}`"
+						:src="`${imagePath}/${book.poster.image_cover}`"
 						:alt="book.title"
 					/>
 				</div>
@@ -43,6 +43,7 @@ export default defineComponent({
 
 	mounted() {
 		this.getAllBooks();
+		console.log(this.$store.state.bookStore.Books);
 	},
 });
 </script>
