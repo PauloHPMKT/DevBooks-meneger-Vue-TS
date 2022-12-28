@@ -1,30 +1,22 @@
 <template>
 	<div class="overview">
-		<div class="overview__search-bar">
-			<div>
-				<BaseInput placeholder="Faca aqui sua busca!" />
-			</div>
-			<div>
-				<MainButton :title_btn="'Pesquisar'" />
-				<MainButton :title_btn="'Adicionar novo livro'" />
-			</div>
+		<div>
+			<ul>
+				<li v-for="book in books" :key="book._id">
+					<div>
+						<p>{{ book.title }}</p>
+						<p>{{ book.author.name }}</p>
+						<img
+							v-if="
+								book.poster.image_cover ? book.poster.image_cover : empty.poster
+							"
+							:src="`${imagePath}/${book.poster.image_cover}`"
+							:alt="book.title"
+						/>
+					</div>
+				</li>
+			</ul>
 		</div>
-		<h3>pagina de livros</h3>
-		<ul>
-			<li v-for="book in books" :key="book._id">
-				<div>
-					<p>{{ book.title }}</p>
-					<p>{{ book.author.name }}</p>
-					<img
-						v-if="
-							book.poster.image_cover ? book.poster.image_cover : empty.poster
-						"
-						:src="`${imagePath}/${book.poster.image_cover}`"
-						:alt="book.title"
-					/>
-				</div>
-			</li>
-		</ul>
 	</div>
 </template>
 
@@ -58,10 +50,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-.overview__search-bar {
-	background: red;
-	display: flex;
-	align-items: center;
-}
-</style>
+<style lang="scss"></style>
