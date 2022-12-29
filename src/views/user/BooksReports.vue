@@ -1,22 +1,26 @@
 <template>
 	<div class="overview">
 		<div>
-			<SearchBar />
-			<ul>
-				<li v-for="book in books" :key="book._id">
-					<div>
-						<p>{{ book.title }}</p>
-						<p>{{ book.author.name }}</p>
-						<img
-							v-if="
-								book.poster.image_cover ? book.poster.image_cover : empty.poster
-							"
-							:src="`${imagePath}/${book.poster.image_cover}`"
-							:alt="book.title"
-						/>
-					</div>
-				</li>
-			</ul>
+			<SearchBar @search="searchBook" @open-form="createNewBook" />
+			<div class="table-books">
+				<ul>
+					<li v-for="book in books" :key="book._id">
+						<div>
+							<p>{{ book.title }}</p>
+							<p>{{ book.author.name }}</p>
+							<img
+								v-if="
+									book.poster.image_cover
+										? book.poster.image_cover
+										: empty.poster
+								"
+								:src="`${imagePath}/${book.poster.image_cover}`"
+								:alt="book.title"
+							/>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </template>
@@ -42,6 +46,14 @@ export default defineComponent({
 		async getAllBooks() {
 			await this.$store.dispatch("bookStore/getBooks", this.books);
 		},
+
+		searchBook(data: string) {
+			console.log(data);
+		},
+
+		createNewBook() {
+			alert("chamar form de cadastro de livro");
+		},
 	},
 	mounted() {
 		this.getAllBooks();
@@ -50,4 +62,11 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.table-books {
+	background-color: #fff;
+	margin: 15px 0;
+	padding: 20px;
+	border-radius: 8px;
+}
+</style>
