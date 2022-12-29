@@ -1,11 +1,20 @@
 <template>
 	<div class="search-bar">
 		<div>
-			<BaseInput class="input-styles" placeholder="Faca aqui sua busca!" />
+			<BaseInput
+				class="input-styles"
+				v-model="search_data"
+				placeholder="Faca aqui sua busca!"
+			/>
 		</div>
-		<div>
-			<MainButton :title_btn="'Pesquisar'" />
-			<MainButton :title_btn="'Adicionar novo livro'" />
+		<div class="btn-container">
+			<form @submit.prevent="$emit('search', search_data)">
+				<MainButton type="submit" :title_btn="'Pesquisar livro'" />
+			</form>
+			<MainButton
+				@click="$emit('openForm')"
+				:title_btn="'Adicionar novo livro'"
+			/>
 		</div>
 	</div>
 </template>
@@ -18,6 +27,12 @@ import MainButton from "@/components/Buttons/MainButton.vue";
 export default defineComponent({
 	name: "SearchBar",
 	components: { BaseInput, MainButton },
+	emits: ["search", "openForm"],
+	data() {
+		return {
+			search_data: "",
+		};
+	},
 });
 </script>
 
@@ -30,17 +45,25 @@ export default defineComponent({
 	border-radius: 8px;
 
 	.input-styles {
-		border: 1px solid #cdcdcd;
-		margin-right: 20px;
+		border: 1px solid #d3d2d2;
+		margin-right: 10px;
 	}
 
-	button {
-		margin-right: 10px;
-		background-image: linear-gradient(#343a63, #1f233b);
-		color: #fff;
+	.btn-container {
+		display: flex;
 
-		&:active:focus {
-			background: #1f233b;
+		button {
+			margin-right: 10px;
+			background-image: linear-gradient(#343a63, #1f233b);
+			color: #fff;
+
+			&:hover {
+				background: #343a63;
+			}
+
+			&:active:focus {
+				background: #1f233b;
+			}
 		}
 	}
 }
