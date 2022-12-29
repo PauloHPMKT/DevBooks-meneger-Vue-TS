@@ -1,6 +1,7 @@
 <template>
 	<div class="overview">
 		<div>
+			<SearchBar />
 			<ul>
 				<li v-for="book in books" :key="book._id">
 					<div>
@@ -22,13 +23,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import MainButton from "@/components/Buttons/MainButton.vue";
-import BaseInput from "@/components/Inputs/BaseInput.vue";
+import SearchBar from "@/components/SearchBar/index.vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "BooksReports",
-	components: { MainButton, BaseInput },
+	components: { SearchBar },
 	data() {
 		return {
 			books: this.$store.state.bookStore.Books,
