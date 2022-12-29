@@ -3,7 +3,10 @@
 		<nav>
 			<ul class="links__navigation">
 				<li v-for="link in dataLinks" :key="link.id">
-					<router-link :to="{ path: `${link.router}` }">
+					<router-link
+						:to="{ path: `${link.router}` }"
+						@click="defineRouterName(link.description)"
+					>
 						<Icon :icon="`carbon:${link.icon}`" />
 						<p>{{ link.description }}</p>
 					</router-link>
@@ -26,6 +29,12 @@ export default defineComponent({
 		return {
 			dataLinks: routerLinks,
 		};
+	},
+
+	methods: {
+		defineRouterName(data: string) {
+			this.$store.state.userStore.routerName = data;
+		},
 	},
 });
 </script>

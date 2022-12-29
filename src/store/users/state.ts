@@ -1,8 +1,8 @@
 export default {
 	Users: [],
 	User: {},
-	Me: '',
-	userName: '',
-	userEmail: '',
-	userId: '',
-}
+	userName: "",
+	userEmail: "",
+	userId: "",
+	routerName: "Dashboard",
+};
