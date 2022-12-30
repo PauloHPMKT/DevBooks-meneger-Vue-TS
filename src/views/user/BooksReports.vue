@@ -2,6 +2,8 @@
 	<div class="overview">
 		<div>
 			<SearchBar @search="searchBook" @open-form="createNewBook" />
+			<!-- Forms components -->
+			<FormBook />
 			<div class="table-books">
 				<ul>
 					<li v-for="book in books" :key="book._id">
@@ -28,11 +30,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import SearchBar from "@/components/SearchBar/index.vue";
+import FormBook from "@/components/Forms/Books/FormBook.vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "BooksReports",
-	components: { SearchBar },
+	components: { SearchBar, FormBook },
 	data() {
 		return {
 			books: this.$store.state.bookStore.Books,
