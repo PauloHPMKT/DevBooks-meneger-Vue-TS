@@ -6,6 +6,12 @@
 					<router-link
 						:to="{ path: `${link.router}` }"
 						@click="defineRouterName(link.description)"
+						:class="{
+							isActiveRouter:
+								$store.state.userStore.routerName === link.description
+									? isActive
+									: isInactive,
+						}"
 					>
 						<Icon :icon="`carbon:${link.icon}`" />
 						<p>{{ link.description }}</p>
@@ -28,6 +34,8 @@ export default defineComponent({
 	data() {
 		return {
 			dataLinks: routerLinks,
+			isActive: true,
+			isInactive: false,
 		};
 	},
 
@@ -36,5 +44,7 @@ export default defineComponent({
 			this.$store.state.userStore.routerName = data;
 		},
 	},
+
+	mounted() {},
 });
 </script>

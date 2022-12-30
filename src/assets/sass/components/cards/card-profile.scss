@@ -8,40 +8,13 @@
 	right: -100%;
 	z-index: 1000;
 	height: 100vh;
-	width: 400px;
+	width: 450px;
 	//cursor: default;
-	animation: slideRight .2s ease-in-out;
-
-	@keyframes slideRight {
-		0% {
-			opacity: 1;
-			visibility: visible;
-			right: 0;
-		}
-		100% {
-			opacity: 0;
-			visibility: hidden;
-			right: -100%;
-		}
-	}
+	transition: right 0.3s ease-in-out;
 }
 
 .isActive {
 	right: 0;
 	//transition: All cubic-bezier(0.68, -0.55, 0.265, 1.55);
-	animation: slideLeft .2s ease-in-out;
-
-	@keyframes slideLeft {
-		0% {
-			opacity: 0;
-			visibility: hidden;
-			right: -100%;
-		}
-		100% {
-			opacity: 1;
-			visibility: visible;
-			right: 0;
-		}
-	}
+	transition: right 0.3s ease-in-out;
 }
-

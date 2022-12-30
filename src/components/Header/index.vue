@@ -16,9 +16,8 @@
 			</div>
 		</div>
 		<div class="header__infos--commands">
-			<div @click="isCardActive" :title="user_message">
-				<Icon icon="carbon:user-avatar-filled" />
-				<span>Meu painel</span>
+			<div @click="isCardActive" :title="user_message" ref="profileCard">
+				<span>L</span>
 			</div>
 			<ProfileCard
 				@hiddenProfileCard="hiddenCard"
@@ -30,13 +29,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Icon } from "@iconify/vue";
 
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 
 export default defineComponent({
 	name: "Header",
-	components: { Icon, ProfileCard },
+	components: { ProfileCard },
 	data() {
 		return {
 			user_message: `Clique aqui para acessar suas configuracoes`,
@@ -50,6 +48,15 @@ export default defineComponent({
 		hiddenCard() {
 			this.setProfileCard = false;
 		},
+	},
+
+	mounted() {
+		const self: any = this.$refs.profileCard;
+		document.addEventListener("click", (e: Event) => {
+			if (self !== undefined && self.contains(e.target) === false) {
+				this.setProfileCard = false;
+			}
+		});
 	},
 });
 </script>

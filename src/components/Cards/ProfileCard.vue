@@ -16,16 +16,12 @@ import { Icon } from "@iconify/vue";
 export default defineComponent({
 	name: "CardProfile",
 	components: { Icon },
-	emits: ['hiddenProfileCard'],
+	emits: ["hiddenProfileCard"],
 	methods: {
 		handleLogout() {
 			localStorage.clear();
 			this.$router.push("/login");
 		},
-
-		alerta() {
-			alert('ueepa')
-		}
 	},
 });
 </script>
