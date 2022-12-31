@@ -66,6 +66,13 @@
 									placeholder="Ano do livro"
 								/>
 							</div>
+							<div class="m-bottom wd-input">
+								<BaseInput
+									class="input-styles"
+									v-model="book.pages_number"
+									placeholder="Total de páginas"
+								/>
+							</div>
 						</div>
 						<div class="m-bottom">
 							<BaseInput
@@ -173,7 +180,7 @@ export default defineComponent({
 			}
 
 			.wd-input {
-				width: 49%;
+				width: 32.5%;
 			}
 
 			.m-bottom {
