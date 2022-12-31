@@ -25,7 +25,28 @@
 						<div class="book-informations">
 							<h5>Sinópse</h5>
 							<p>{{ book.full_plot }}</p>
-							<p>{{ book.author.name }}</p>
+							<div class="book-technical-informations">
+								<div class="technics-dispatches">
+									<h5>Informações Tecnicas</h5>
+									<p>Autor: {{ book.author.name }}</p>
+									<p>Genero: {{ book.genres }}</p>
+									<p>Idioma: {{ book.language }}</p>
+									<p>Ano de lancamento: {{ book.year }}</p>
+									<p>Número de páginas: {{ book.pages_number }}</p>
+								</div>
+								<div class="technics-dispatches">
+									<h5>Informações dos críticos</h5>
+									<p>Nota por avaliacao: {{ book.technical.rating }}</p>
+									<p>Leitores: {{ book.technical.readers }}</p>
+									<p>Votantes: {{ book.technical.votes }}</p>
+								</div>
+								<div class="technics-dispatches">
+									<p>
+										O registro desse exemplar foi criado em:
+										{{ new Date(book.createdAt).toLocaleString().slice(0, 10) }}
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</li>
@@ -91,6 +112,15 @@ export default defineComponent({
 
 		.title-book-infomations {
 			margin-bottom: 20px;
+			cursor: pointer;
+
+			h3 {
+				margin-bottom: 5px;
+			}
+
+			p {
+				font-size: 14px;
+			}
 		}
 
 		.card-book-infomations {
@@ -114,6 +144,19 @@ export default defineComponent({
 				h5 {
 					font-size: 20px;
 					margin-bottom: 15px;
+				}
+
+				.book-technical-informations {
+					display: flex;
+					margin-top: 30px;
+
+					.technics-dispatches {
+						width: 33.3%;
+
+						> p {
+							margin-bottom: 5px;
+						}
+					}
 				}
 			}
 		}
