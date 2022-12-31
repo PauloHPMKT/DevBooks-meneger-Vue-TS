@@ -12,6 +12,7 @@ import { Icon } from "@iconify/vue";
 export default defineComponent({
 	name: "FormBook",
 	components: { Icon },
+	emits: ["hiddenForm"],
 });
 </script>
 

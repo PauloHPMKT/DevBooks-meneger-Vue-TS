@@ -1,9 +1,9 @@
 <template>
 	<div class="overview">
 		<div>
-			<SearchBar @search="searchBook" @open-form="createNewBook" />
+			<SearchBar @search="searchBook" @open-form="openForm" />
 			<!-- Forms components -->
-			<FormBook />
+			<FormBook v-if="hiddenFormCreate" @hiddenForm="closeForm" />
 			<div class="table-books">
 				<ul>
 					<li v-for="book in books" :key="book._id">
@@ -43,6 +43,7 @@ export default defineComponent({
 				poster: "/img/empty-cover.png",
 			},
 			imagePath: HOST_URI,
+			hiddenFormCreate: false,
 		};
 	},
 	methods: {
@@ -54,8 +55,12 @@ export default defineComponent({
 			console.log(data);
 		},
 
-		createNewBook() {
-			alert("chamar form de cadastro de livro");
+		openForm() {
+			this.hiddenFormCreate = true;
+		},
+
+		closeForm() {
+			this.hiddenFormCreate = false;
 		},
 	},
 	mounted() {
