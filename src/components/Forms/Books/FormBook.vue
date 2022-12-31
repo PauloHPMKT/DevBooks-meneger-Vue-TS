@@ -129,6 +129,10 @@ export default defineComponent({
 			console.log(createBook);
 		},
 	},
+
+	mounted() {
+		console.log(this.$store); //verificar retorno das informacoes dos autores
+	},
 });
 </script>
 
