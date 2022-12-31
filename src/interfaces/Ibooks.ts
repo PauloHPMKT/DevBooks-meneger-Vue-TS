@@ -8,6 +8,7 @@ export interface IBookFields {
 	full_plot: string;
 	genres: string;
 	language: string;
+	year: number;
 	pages_number: number;
 	technical: ITechnical;
 }
