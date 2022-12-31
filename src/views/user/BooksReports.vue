@@ -1,16 +1,22 @@
 <template>
 	<div class="overview">
-		<div>
+		<!-- Definir um escopo de click out target para fechar o form -->
+		<div ref="formCreateBook">
 			<SearchBar @search="searchBook" @open-form="openForm" />
 			<!-- Forms components -->
 			<FormBook v-if="hiddenFormCreate" @hiddenForm="closeForm" />
 			<ul class="table-books">
 				<li v-for="book in books" :key="book._id" class="card-book">
 					<div class="title-book-infomations">
-						<h3>{{ book.title }}</h3>
-						<p>{{ book.plot }}</p>
+						<div @click="hiddenCardBook(book._id)">
+							<h3>{{ book.title }}</h3>
+							<p>{{ book.plot }}</p>
+						</div>
 					</div>
-					<div class="card-book-infomations">
+					<div
+						class="card-book-infomations"
+						v-if="hiddenCardBookInformations && idBook === book._id"
+					>
 						<div class="poster-container">
 							<img
 								v-if="
@@ -72,6 +78,8 @@ export default defineComponent({
 			},
 			imagePath: HOST_URI,
 			hiddenFormCreate: false,
+			hiddenCardBookInformations: false,
+			idBook: "",
 		};
 	},
 	methods: {
@@ -81,6 +89,11 @@ export default defineComponent({
 
 		searchBook(data: string) {
 			console.log(data);
+		},
+
+		hiddenCardBook(id: string) {
+			this.hiddenCardBookInformations = !this.hiddenCardBookInformations;
+			this.idBook = id;
 		},
 
 		openForm() {
@@ -93,7 +106,15 @@ export default defineComponent({
 	},
 	mounted() {
 		this.getAllBooks();
-		console.log(this.$store.state.bookStore.Books);
+
+		const self: any = this.$refs.formCreateBook;
+		document.addEventListener("click", (e: Event) => {
+			console.log(e.target);
+
+			if (self !== undefined && self.contains(e.target) === false) {
+				this.hiddenFormCreate = false;
+			}
+		});
 	},
 });
 </script>
@@ -107,11 +128,11 @@ export default defineComponent({
 
 	.card-book {
 		background-color: #d5e2fb;
-		padding: 25px 20px;
+		padding: 25px 20px 20px 20px;
+		margin-bottom: 5px;
 		border-radius: 8px;
 
 		.title-book-infomations {
-			margin-bottom: 20px;
 			cursor: pointer;
 
 			h3 {
@@ -125,7 +146,8 @@ export default defineComponent({
 
 		.card-book-infomations {
 			background-color: #fff;
-			padding: 25px 10px;
+			padding: 10px;
+			margin-top: 25px;
 			border-radius: 8px;
 			display: flex;
 
