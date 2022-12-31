@@ -92,8 +92,11 @@ export default defineComponent({
 		},
 
 		hiddenCardBook(id: string) {
-			this.hiddenCardBookInformations = !this.hiddenCardBookInformations;
 			this.idBook = id;
+
+			if (this.idBook === id && !this.hiddenCardBookInformations) {
+				this.hiddenCardBookInformations = !this.hiddenCardBookInformations;
+			}
 		},
 
 		openForm() {
@@ -109,8 +112,6 @@ export default defineComponent({
 
 		const self: any = this.$refs.formCreateBook;
 		document.addEventListener("click", (e: Event) => {
-			console.log(e.target);
-
 			if (self !== undefined && self.contains(e.target) === false) {
 				this.hiddenFormCreate = false;
 			}
