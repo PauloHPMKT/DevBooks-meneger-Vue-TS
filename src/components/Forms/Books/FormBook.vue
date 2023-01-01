@@ -6,6 +6,13 @@
 			<p>
 				Preencha os campos inserindo os dados conforme solicitados nas labels
 			</p>
+			<!--<div v-for="author in authors" :key="author._id">
+				opa
+				<div
+					v-for="objAuthor in author.name"
+					:key="`${author._id}_${objAuthor}`"
+				></div>
+			</div>-->
 		</div>
 		<form @submit.prevent="submitNewBook">
 			<div class="form-setup">
@@ -38,13 +45,17 @@
 						</div>
 						<div class="m-bottom">
 							<div class="alternative-select-style">
-								<select name="author">
-									<option value="" disabled default>
+								<select name="author" v-model="book.author">
+									<option value="-- Selecione um autor --" disabled selected>
 										-- Selecione um author --
 									</option>
-									<option value="mock 1">mock 1</option>
-									<option value="mock 2">autor 2</option>
-									<option value="mock 3">mock 3</option>
+									<option
+										v-for="author in authors"
+										:key="author._id"
+										:value="author._id"
+									>
+										{{ author.name }}
+									</option>
 								</select>
 							</div>
 						</div>
@@ -113,6 +124,7 @@ export default defineComponent({
 	data() {
 		return {
 			book: {} as IBookFields,
+			authors: this.$store.state.authorStore.authors,
 		};
 	},
 
@@ -131,7 +143,7 @@ export default defineComponent({
 	},
 
 	mounted() {
-		console.log(this.$store); //verificar retorno das informacoes dos autores
+		console.log(this.authors); //verificar retorno das informacoes dos autores
 	},
 });
 </script>
