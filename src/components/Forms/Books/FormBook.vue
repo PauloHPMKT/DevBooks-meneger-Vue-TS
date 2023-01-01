@@ -111,13 +111,20 @@
 				>
 					<span>Arraste ou Solte o arquivo</span>
 					<span>Ou</span>
-					<label for="dropzoneFile">Selecione seu arquivo</label>
+					<label
+						for="dropzoneFile"
+						v-if="
+							active === true
+								? (label_text = `${dropzoneFile.name}`)
+								: label_text
+						"
+						>{{ label_text }}</label
+					>
 					<input type="file" id="dropzoneFile" />
 				</div>
 			</div>
 			<div class="m-top">
 				<MainButton class="alternative-button" :title_btn="'Cadastrar'" />
-				<span>teste {{ dropzoneFile.name }}</span>
 			</div>
 		</form>
 	</div>
@@ -140,6 +147,7 @@ export default defineComponent({
 			authors: this.$store.state.authorStore.authors,
 			dropzoneFile: {} as any,
 			active: false,
+			label_text: "Selecione seu arquivo",
 		};
 	},
 
@@ -150,11 +158,11 @@ export default defineComponent({
 
 		dropFile(e: DragEvent) {
 			this.dropzoneFile = e.dataTransfer?.files[0];
-			console.log(this.dropzoneFile.name);
+			console.log(this.dropzoneFile);
 			console.log((this.book.poster = this.dropzoneFile.name));
 		},
 
-		//repassar valor do  input file para this.book e submeter
+		//repassar valor do  input file para this.book e submeter | capturar por id
 
 		/*selectedFile(): void {
 
@@ -278,7 +286,7 @@ export default defineComponent({
 
 			label {
 				padding: 8px 20px;
-				color: #002c3a;
+				color: #fff;
 				background-color: #009acc;
 				transition: 0.3s ease-in-out all;
 				cursor: pointer;
