@@ -10,11 +10,11 @@ export interface IBookFields {
 	language: string;
 	year: number;
 	pages_number: number;
-	technical: ITechnical;
 }
 
+/*technical: ITechnical;
 interface ITechnical {
 	rating: number;
 	readers: number;
 	votes: number;
-}
+}*/
