@@ -18,13 +18,14 @@
 						v-if="hiddenCardBookInformations && idBook === book._id"
 					>
 						<div class="poster-container">
+							<!--tratar erro de imagem vazia-->
 							<img
 								v-if="
-									book.poster.image_cover
-										? book.poster.image_cover
-										: empty.poster
+									book.poster.image_cover === ''
+										? empty.poster
+										: book.poster.image_cover
 								"
-								:src="`${imagePath}/${book.poster.image_cover}`"
+								:src="`${imagePath}/${book.poster.image_cover}` || empty.poster"
 								:alt="book.title"
 							/>
 						</div>
@@ -40,12 +41,12 @@
 									<p>Ano de lancamento: {{ book.year }}</p>
 									<p>Número de páginas: {{ book.pages_number }}</p>
 								</div>
-								<div class="technics-dispatches">
+								<!--<div class="technics-dispatches">
 									<h5>Informações dos críticos</h5>
 									<p>Nota por avaliacao: {{ book.technical.rating }}</p>
 									<p>Leitores: {{ book.technical.readers }}</p>
 									<p>Votantes: {{ book.technical.votes }}</p>
-								</div>
+								</div>-->
 								<div class="technics-dispatches">
 									<p>
 										O registro desse exemplar foi criado em:
@@ -74,7 +75,7 @@ export default defineComponent({
 		return {
 			books: this.$store.state.bookStore.Books,
 			empty: {
-				poster: "/img/empty-cover.png",
+				poster: "img/empty-cover.png",
 			},
 			imagePath: HOST_URI,
 			hiddenFormCreate: false,
