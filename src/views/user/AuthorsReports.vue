@@ -1,5 +1,12 @@
 <template>
-	<div>{{ $store.state.authorStore.authors }}</div>
+	<div>
+		<ul>
+			<li v-for="author in authors" :key="author._id">
+				<div>{{ author.name }}</div>
+				<div>{{ author.biography }}</div>
+			</li>
+		</ul>
+	</div>
 </template>
 
 <script lang="ts">
@@ -9,7 +16,7 @@ export default defineComponent({
 	name: "AuthorsReports",
 	data() {
 		return {
-			authors: [],
+			authors: this.$store.state.authorStore.authors,
 		};
 	},
 
@@ -21,7 +28,6 @@ export default defineComponent({
 
 	mounted() {
 		this.getAllAuthors();
-		console.log(this.$store.state);
 	},
 });
 </script>
