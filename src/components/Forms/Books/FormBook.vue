@@ -101,10 +101,23 @@
 						</div>
 					</div>
 				</div>
-				<div class="dropzone">Dropzone</div>
+				<div
+					@dragenter.prevent="toggleActive"
+					@dragleave.prevent="toggleActive"
+					@dragover.prevent
+					@drop.prevent="dropFile"
+					:class="{ 'active-dropzone': active }"
+					class="dropzone"
+				>
+					<span>Arraste ou Solte o arquivo</span>
+					<span>Ou</span>
+					<label for="dropzoneFile">Selecione seu arquivo</label>
+					<input type="file" id="dropzoneFile" />
+				</div>
 			</div>
 			<div class="m-top">
 				<MainButton class="alternative-button" :title_btn="'Cadastrar'" />
+				<span>teste {{ dropzoneFile.name }}</span>
 			</div>
 		</form>
 	</div>
@@ -125,10 +138,32 @@ export default defineComponent({
 		return {
 			book: {} as IBookFields,
 			authors: this.$store.state.authorStore.authors,
+			dropzoneFile: {} as any,
+			active: false,
 		};
 	},
 
 	methods: {
+		toggleActive() {
+			this.active = !this.active;
+		},
+
+		dropFile(e: DragEvent) {
+			this.dropzoneFile = e.dataTransfer?.files[0];
+			console.log(this.dropzoneFile.name);
+			console.log((this.book.poster = this.dropzoneFile.name));
+		},
+
+		//repassar valor do  input file para this.book e submeter
+
+		/*selectedFile(): void {
+
+			colocar no input  @change="/*selectedFile
+
+			this.dropzoneFile = document.querySelector("#dropzoneFile").files[0];
+			console.log(this.dropzoneFile);
+		},*/
+
 		submitNewBook() {
 			const { ...book } = this.book;
 			const createBook = {
@@ -140,10 +175,6 @@ export default defineComponent({
 
 			console.log(createBook);
 		},
-	},
-
-	mounted() {
-		console.log(this.authors); //verificar retorno das informacoes dos autores
 	},
 });
 </script>
@@ -180,7 +211,7 @@ export default defineComponent({
 
 	.form-setup {
 		display: flex;
-		width: 750px;
+		width: 850px;
 
 		.inputs-fields {
 			padding-right: 5%;
@@ -228,6 +259,44 @@ export default defineComponent({
 						border: none;
 					}
 				}
+			}
+		}
+
+		.dropzone {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			height: 300px;
+			width: 250px;
+			row-gap: 16px;
+			border: 2px dashed #009acc;
+			border-radius: 8px;
+			padding: 20px;
+			transition: 0.3s ease-in-out all;
+			cursor: pointer;
+
+			label {
+				padding: 8px 20px;
+				color: #002c3a;
+				background-color: #009acc;
+				transition: 0.3s ease-in-out all;
+				cursor: pointer;
+			}
+
+			input[type="file"] {
+				display: none;
+			}
+		}
+
+		.active-dropzone {
+			color: #fff;
+			border-color: #fff;
+			background-color: #002c3a;
+
+			label {
+				background-color: #fff;
+				color: #002c3a;
 			}
 		}
 	}
