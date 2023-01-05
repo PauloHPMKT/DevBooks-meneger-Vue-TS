@@ -1,11 +1,13 @@
 import { ApiService } from "./api";
 
 export default {
-	// getBooks: () => {
-	// 	return ApiService.get(`/books`);
-	// },
+	getUploadedImages: (id: string) => {
+		return ApiService.get(`/books/upload/${id}`);
+	},
 
-	uploadImage: (data: object) => {
-		return ApiService.post(`/books/upload`, data);
+	uploadImage: (data: object, headers: any) => {
+		console.log(data);
+
+		return ApiService.post(`/books/upload`, data, headers);
 	},
 };

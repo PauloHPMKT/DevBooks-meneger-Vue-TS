@@ -6,127 +6,142 @@
 			<p>
 				Preencha os campos inserindo os dados conforme solicitados nas labels
 			</p>
-			<!--<div v-for="author in authors" :key="author._id">
-				opa
-				<div
-					v-for="objAuthor in author.name"
-					:key="`${author._id}_${objAuthor}`"
-				></div>
-			</div>-->
 		</div>
-		<form @submit.prevent="submitNewBook">
-			<div class="form-setup">
-				<div class="inputs-fields">
-					<div>
-						<p>Informacoes gerais</p>
-						<div class="m-bottom">
-							<BaseInput
-								class="input-styles"
-								v-model="book.title"
-								placeholder="Título do livro"
-							/>
-						</div>
-						<div class="m-bottom">
-							<BaseInput
-								class="input-styles"
-								v-model="book.plot"
-								placeholder="Resumo da sinopse"
-							/>
-						</div>
-						<div class="m-bottom">
-							<div class="textarea-style">
-								<textarea
-									cols="30"
-									rows="10"
-									v-model="book.full_plot"
-									placeholder="Sinopse completa"
-								></textarea>
-							</div>
-						</div>
-						<div class="m-bottom">
-							<div class="alternative-select-style">
-								<select name="author" v-model="book.author">
-									<option value="-- Selecione um autor --" disabled selected>
-										-- Selecione um author --
-									</option>
-									<option
-										v-for="author in authors"
-										:key="author._id"
-										:value="author._id"
-									>
-										{{ author.name }}
-									</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div>
-						<p>Informacoes tecnicas</p>
-						<div class="flex-fields">
-							<div class="m-bottom wd-input">
+		<div class="forms">
+			<form @submit.prevent="submitNewBook">
+				<div class="form-setup">
+					<div class="inputs-fields">
+						<div>
+							<p>Informacoes gerais</p>
+							<div class="m-bottom">
 								<BaseInput
 									class="input-styles"
-									v-model="book.cod"
-									placeholder="Código do livro"
+									v-model="book.title"
+									placeholder="Título do livro"
 								/>
 							</div>
-							<div class="m-bottom wd-input">
+							<div class="m-bottom">
 								<BaseInput
 									class="input-styles"
-									v-model="book.year"
-									placeholder="Ano do livro"
+									v-model="book.plot"
+									placeholder="Resumo da sinopse"
 								/>
 							</div>
-							<div class="m-bottom wd-input">
+							<div class="m-bottom">
+								<div class="textarea-style">
+									<textarea
+										cols="30"
+										rows="10"
+										v-model="book.full_plot"
+										placeholder="Sinopse completa"
+									></textarea>
+								</div>
+							</div>
+							<div class="m-bottom">
+								<div class="alternative-select-style">
+									<select name="author" v-model="book.author">
+										<option value="-- Selecione um autor --" disabled selected>
+											-- Selecione um author --
+										</option>
+										<option
+											v-for="author in authors"
+											:key="author._id"
+											:value="author._id"
+										>
+											{{ author.name }}
+										</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div>
+							<p>Informacoes tecnicas</p>
+							<div class="flex-fields">
+								<div class="m-bottom wd-input">
+									<BaseInput
+										class="input-styles"
+										v-model="book.cod"
+										placeholder="Código do livro"
+									/>
+								</div>
+								<div class="m-bottom wd-input">
+									<BaseInput
+										class="input-styles"
+										v-model="book.year"
+										placeholder="Ano do livro"
+									/>
+								</div>
+								<div class="m-bottom wd-input">
+									<BaseInput
+										class="input-styles"
+										v-model="book.pages_number"
+										placeholder="Total de páginas"
+									/>
+								</div>
+							</div>
+							<div class="m-bottom">
 								<BaseInput
 									class="input-styles"
-									v-model="book.pages_number"
-									placeholder="Total de páginas"
+									v-model="book.language"
+									placeholder="Idioma original do livro"
 								/>
 							</div>
-						</div>
-						<div class="m-bottom">
-							<BaseInput
-								class="input-styles"
-								v-model="book.language"
-								placeholder="Idioma original do livro"
-							/>
-						</div>
-						<div class="m-bottom">
-							<BaseInput
-								class="input-styles"
-								v-model="book.genres"
-								placeholder="Genero do livro"
-							/>
+							<div class="m-bottom">
+								<BaseInput
+									class="input-styles"
+									v-model="book.genres"
+									placeholder="Genero do livro"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div
-					@dragenter.prevent="toggleActive"
-					@dragleave.prevent="toggleActive"
-					@dragover.prevent
-					@drop.prevent="dropFile"
-					:class="{ 'active-dropzone': active }"
-					class="dropzone"
-				>
-					<span>Arraste ou Solte o arquivo</span>
-					<span>Ou</span>
-					<label
-						for="dropzoneFile"
-						v-if="
-							active === true
-								? (label_text = `${dropzoneFile.name}`)
-								: label_text
-						"
-						>{{ label_text }}</label
+				<div class="m-top">
+					<MainButton class="alternative-button" :title_btn="'Cadastrar'" />
+				</div>
+			</form>
+			<div>
+				<form name="image" enctype="multipart/form-data">
+					<div
+						@dragenter.prevent="toggleActive"
+						@dragleave.prevent="toggleActive"
+						@dragover.prevent
+						@drop.prevent="dropFile"
+						:class="{ 'active-dropzone': active }"
+						class="dropzone"
 					>
-					<input type="file" id="dropzoneFile" />
+						<span>Arraste ou Solte o arquivo</span>
+						<span>Ou</span>
+						<label
+							for="dropzoneFile"
+							v-if="
+								active === true ? (label_text = `${fileList.name}`) : label_text
+							"
+							>{{ label_text }}</label
+						>
+						<input
+							type="file"
+							id="dropzoneFile"
+							@change="onFileChange"
+							ref="file"
+							name="image"
+						/>
+					</div>
+				</form>
+				<!--<div v-bind="getRootProps()">
+					<input v-bind="getInputProps()" />
+					<p v-if="isDragActive">Drop the files here ...</p>
+					<p v-else>Drag 'n' drop some files here, or click to select files</p>
 				</div>
+				<button @click="open">open</button>-->
 			</div>
-			<div class="m-top">
-				<MainButton class="alternative-button" :title_btn="'Cadastrar'" />
-			</div>
-		</form>
+		</div>
+		<!--<QuestionModal
+			:file_name="label_text"
+			@actionBtn="uploadImage"
+			@closeModal="closeQuestionModal"
+			v-if="hiddenQuestionModal"
+		/>-->
 	</div>
 </template>
 
@@ -136,18 +151,22 @@ import { Icon } from "@iconify/vue";
 import type { IBookFields } from "@/interfaces/Ibooks";
 import BaseInput from "@/components/Inputs/BaseInput.vue";
 import MainButton from "@/components/Buttons/MainButton.vue";
+import QuestionModal from "@/components/Modals/QuestionModal.vue";
+import uploadService from "@/services/uploadService";
 
 export default defineComponent({
 	name: "FormBook",
-	components: { Icon, BaseInput, MainButton },
+	components: { Icon, BaseInput, MainButton, QuestionModal },
 	emits: ["hiddenForm"],
 	data() {
 		return {
 			book: {} as IBookFields,
 			authors: this.$store.state.authorStore.authors,
-			dropzoneFile: {} as any,
-			active: false,
+			//dropzoneFile: {} as any,
+			fileList: [] as any,
 			label_text: "Selecione seu arquivo",
+			active: false,
+			hiddenQuestionModal: false,
 		};
 	},
 
@@ -156,22 +175,35 @@ export default defineComponent({
 			this.active = !this.active;
 		},
 
-		dropFile(e: DragEvent) {
-			this.dropzoneFile = e.dataTransfer?.files[0];
-			console.log(this.dropzoneFile);
-			console.log((this.book.poster = this.dropzoneFile.name));
+		/*closeQuestionModal() {
+			this.hiddenQuestionModal = false;
+			this.active = false;
+			this.label_text = "Selecione seu arquivo";
+		},*/
+
+		async dropFile(e: DragEvent) {
+			this.hiddenQuestionModal = true;
+		},
+
+		// funcao para o input type file
+		async onFileChange() {
+			this.active = !this.active;
+			this.fileList = this.$refs.file.files;
+
+			const formData = new FormData();
+
+			formData.append("image", this.fileList[0]);
+
+			uploadService
+				.uploadImage(formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				})
+				.then((res) => console.log(res));
 		},
 
 		//repassar valor do  input file para this.book e submeter | capturar por id
-
-		/*selectedFile(): void {
-
-			colocar no input  @change="/*selectedFile
-
-			this.dropzoneFile = document.querySelector("#dropzoneFile").files[0];
-			console.log(this.dropzoneFile);
-		},*/
-
 		submitNewBook() {
 			const { ...book } = this.book;
 			const createBook = {
@@ -217,54 +249,59 @@ export default defineComponent({
 		}
 	}
 
-	.form-setup {
+	.forms {
 		display: flex;
-		width: 850px;
+		width: 100%;
 
-		.inputs-fields {
-			padding-right: 5%;
-			width: 70%;
+		.form-setup {
+			width: 100%;
+			display: flex;
 
-			p {
-				margin: 20px 0 10px 0;
-			}
+			.inputs-fields {
+				padding-right: 5%;
+				width: 90%;
 
-			.flex-fields {
-				display: flex;
-				justify-content: space-between;
-			}
-
-			.wd-input {
-				width: 32.5%;
-			}
-
-			.m-bottom {
-				margin-bottom: 7px;
-
-				.input-styles {
-					border: 1px solid #c6c1c1;
-					width: 100%;
+				p {
+					margin: 20px 0 10px 0;
 				}
-				.textarea-style {
-					@include alternative-style(100px);
 
-					textarea {
-						padding-top: 12px;
-						font-size: 1rem;
-						border: none;
-						font-family: "Roboto", Arial, Helvetica, sans-serif;
+				.flex-fields {
+					display: flex;
+					justify-content: space-between;
+				}
+
+				.wd-input {
+					width: 32.5%;
+				}
+
+				.m-bottom {
+					margin-bottom: 7px;
+
+					.input-styles {
+						border: 1px solid #c6c1c1;
 						width: 100%;
 					}
-				}
+					.textarea-style {
+						@include alternative-style(100px);
 
-				.alternative-select-style {
-					@include alternative-style(40px);
+						textarea {
+							padding-top: 12px;
+							font-size: 1rem;
+							border: none;
+							font-family: "Roboto", Arial, Helvetica, sans-serif;
+							width: 100%;
+						}
+					}
 
-					select {
-						font-size: 16px;
-						width: 100%;
-						height: 100%;
-						border: none;
+					.alternative-select-style {
+						@include alternative-style(40px);
+
+						select {
+							font-size: 16px;
+							width: 100%;
+							height: 100%;
+							border: none;
+						}
 					}
 				}
 			}
@@ -275,13 +312,14 @@ export default defineComponent({
 			justify-content: center;
 			align-items: center;
 			flex-direction: column;
-			height: 300px;
-			width: 250px;
+			height: 250px;
+			width: 200px;
 			row-gap: 16px;
 			border: 2px dashed #009acc;
 			border-radius: 8px;
-			padding: 20px;
+			padding: 10px;
 			transition: 0.3s ease-in-out all;
+			font-size: 12px;
 			cursor: pointer;
 
 			label {
