@@ -8,4 +8,8 @@ export default {
 	createBook: (data: object) => {
 		return ApiService.post(`/books/create`, data);
 	},
+
+	removeBook: (id: string) => {
+		return ApiService.delete(`/books/${id}`);
+	},
 };
