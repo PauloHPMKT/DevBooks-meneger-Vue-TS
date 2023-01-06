@@ -23,7 +23,7 @@
 							v-if="hiddenQuestionModal && idBook === book._id"
 							:text_field="`Deseja remover o livro ${book.title}?`"
 							@closeModal="closeQuestionModal"
-							@action="removeBookItem"
+							@action="removeBookItem(book._id)"
 						/>
 					</div>
 					<div
@@ -82,6 +82,7 @@ import SearchBar from "@/components/SearchBar/index.vue";
 import FormBook from "@/components/Forms/Books/FormBook.vue";
 import OptionsModal from "@/components/Modals/OptionsModal.vue";
 import QuestionModal from "@/components/Modals/QuestionModal.vue";
+import bookService from "@/services/bookService";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
@@ -107,8 +108,11 @@ export default defineComponent({
 			await this.$store.dispatch("bookStore/getBooks", this.books);
 		},
 
-		async removeBookItem() {
-			alert("teste");
+		//remove book
+		async removeBookItem(id: string) {
+			await bookService.removeBook(id).then((res) => {
+				if (res.status === 204) this.getAllBooks();
+			});
 		},
 
 		callOptionsModal(id: string) {
