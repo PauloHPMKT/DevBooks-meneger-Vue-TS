@@ -37,6 +37,7 @@
 									></textarea>
 								</div>
 							</div>
+							<p>Encontre o autor do livro</p>
 							<div class="m-bottom">
 								<div class="alternative-select-style">
 									<select name="author" v-model="book.author">
@@ -122,8 +123,8 @@
 						:class="{ 'active-dropzone': active }"
 						class="dropzone"
 					>
-						<span>Arraste ou Solte o arquivo</span>
-						<span>Ou</span>
+						<span>Arraste e solte uma imagem</span>
+						<span>ou</span>
 						<label
 							for="dropzoneFile"
 							v-if="
