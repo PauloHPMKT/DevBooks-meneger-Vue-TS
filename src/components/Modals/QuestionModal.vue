@@ -6,7 +6,7 @@
 				<button>Sim</button>
 			</div>
 			<div>
-				<button @click="$emit('closeModal')">Não</button>
+				<MainButton :title_btn="'Não'" @click="$emit('closeModal')" />
 			</div>
 		</div>
 	</div>
@@ -14,16 +14,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import MainButton from "../Buttons/MainButton.vue";
 
 export default defineComponent({
 	name: "QuestionModal",
 	emits: ["actionBtn", "closeModal"],
-	/*props: {
-		file_name: {
-			type: String,
-			required: true,
-		},
-	},*/
+	components: { MainButton },
 });
 </script>
 
