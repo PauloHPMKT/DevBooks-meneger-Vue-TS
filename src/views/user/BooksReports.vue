@@ -17,10 +17,10 @@
 						</div>
 						<OptionsModal
 							v-if="hiddenOptionsModal && idBook === book._id"
-							@remove="callQuestionModal"
+							@remove="callQuestionModal(book._id)"
 						/>
 						<QuestionModal
-							v-if="hiddenQuestionModal"
+							v-if="hiddenQuestionModal && idBook === book._id"
 							:text_field="`Deseja remover o livro ${book.title}?`"
 							@closeModal="closeQuestionModal"
 							@action="removeBookItem"
@@ -111,7 +111,18 @@ export default defineComponent({
 			alert("teste");
 		},
 
-		callQuestionModal() {
+		callOptionsModal(id: string) {
+			this.idBook = id;
+
+			this.hiddenOptionsModal = !this.hiddenOptionsModal;
+			console.log(this.idBook);
+		},
+
+		callQuestionModal(id: string) {
+			this.idBook = id;
+
+			console.log(this.idBook);
+
 			this.hiddenQuestionModal = true;
 			this.hiddenOptionsModal = false;
 		},
@@ -130,12 +141,6 @@ export default defineComponent({
 			if (this.idBook === id && !this.hiddenCardBookInformations) {
 				this.hiddenCardBookInformations = !this.hiddenCardBookInformations;
 			}
-		},
-
-		callOptionsModal(id: string) {
-			this.idBook = id;
-
-			this.hiddenOptionsModal = !this.hiddenOptionsModal;
 		},
 
 		openForm() {
