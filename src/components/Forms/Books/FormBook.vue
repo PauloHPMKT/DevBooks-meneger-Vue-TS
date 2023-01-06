@@ -102,6 +102,7 @@
 			</form>
 			<div>
 				<form name="image" enctype="multipart/form-data">
+					<!--implementar modal hover para remover a imagem do banco-->
 					<div v-if="imageRender" class="viewarea-cover">
 						<img :src="`${imagePath}/${imageRender}`" alt="current cover" />
 					</div>
@@ -132,12 +133,6 @@
 						/>
 					</div>
 				</form>
-				<!--<div v-bind="getRootProps()">
-					<input v-bind="getInputProps()" />
-					<p v-if="isDragActive">Drop the files here ...</p>
-					<p v-else>Drag 'n' drop some files here, or click to select files</p>
-				</div>
-				<button @click="open">open</button>-->
 			</div>
 		</div>
 		<!--<QuestionModal

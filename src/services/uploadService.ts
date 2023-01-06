@@ -6,8 +6,6 @@ export default {
 	},
 
 	uploadImage: (data: object, headers: any) => {
-		console.log(data);
-
 		return ApiService.post(`/books/upload`, data, headers);
 	},
 };
