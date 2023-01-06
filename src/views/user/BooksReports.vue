@@ -21,7 +21,9 @@
 						/>
 						<QuestionModal
 							v-if="hiddenQuestionModal"
+							:text_field="`Deseja remover o livro ${book.title}?`"
 							@closeModal="closeQuestionModal"
+							@action="removeBookItem"
 						/>
 					</div>
 					<div
@@ -103,6 +105,10 @@ export default defineComponent({
 		//metodos de requisicao
 		async getAllBooks() {
 			await this.$store.dispatch("bookStore/getBooks", this.books);
+		},
+
+		async removeBookItem() {
+			alert("teste");
 		},
 
 		callQuestionModal() {
