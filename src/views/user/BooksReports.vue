@@ -1,6 +1,10 @@
 <template>
 	<div class="overview">
 		<!-- Definir um escopo de click out target para fechar o form -->
+		<StatusModal
+			:status_message="'Frase'"
+			:class="{ isModalActive: isActive, hasError: isError }"
+		/>
 		<div ref="formCreateBook">
 			<SearchBar @search="searchBook" @open-form="openForm" />
 			<!-- Forms components -->
@@ -23,7 +27,7 @@
 							v-if="hiddenQuestionModal && idBook === book._id"
 							:text_field="`Deseja remover o livro ${book.title}?`"
 							@closeModal="closeQuestionModal"
-							@action="removeBookItem(book._id)"
+							@action="removeBookItem(book._id, book)"
 						/>
 					</div>
 					<div
@@ -79,6 +83,7 @@
 import { defineComponent } from "vue";
 import { Icon } from "@iconify/vue";
 import SearchBar from "@/components/SearchBar/index.vue";
+import StatusModal from "@/components/Modals/StatusModal.vue";
 import FormBook from "@/components/Forms/Books/FormBook.vue";
 import OptionsModal from "@/components/Modals/OptionsModal.vue";
 import QuestionModal from "@/components/Modals/QuestionModal.vue";
@@ -87,7 +92,14 @@ const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "BooksReports",
-	components: { SearchBar, FormBook, OptionsModal, Icon, QuestionModal },
+	components: {
+		SearchBar,
+		FormBook,
+		OptionsModal,
+		Icon,
+		QuestionModal,
+		StatusModal,
+	},
 	data() {
 		return {
 			books: this.$store.state.bookStore.Books,
@@ -99,6 +111,8 @@ export default defineComponent({
 			hiddenCardBookInformations: false,
 			hiddenOptionsModal: false,
 			hiddenQuestionModal: false,
+			isActive: false,
+			isError: false,
 			idBook: "",
 		};
 	},
@@ -109,9 +123,19 @@ export default defineComponent({
 		},
 
 		//remove book
-		async removeBookItem(id: string) {
+		async removeBookItem(id: string, book: object) {
 			await bookService.removeBook(id).then((res) => {
-				if (res.status === 204) this.getAllBooks();
+				if (res.status === 204) {
+					this.isActive = true;
+					setTimeout(() => (this.isActive = false), 2000);
+				} else {
+					this.isError = true;
+					setTimeout(() => (this.isError = false), 2000);
+				}
+				let index = this.books.indexOf(book);
+				this.books.splice(index, 1);
+
+				this.hiddenQuestionModal = false;
 			});
 		},
 
