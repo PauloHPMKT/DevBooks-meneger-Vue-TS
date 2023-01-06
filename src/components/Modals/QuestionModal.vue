@@ -32,7 +32,7 @@ export default defineComponent({
 	left: 50%;
 	z-index: 2002;
 	transform: translate(-50%, -50%);
-	filter: drop-shadow(-2px 2px 5px rgba(0, 0, 0, 0.082));
+	filter: drop-shadow(-2px 2px 5px rgba(0, 0, 0, 0.173));
 	background-color: #fff;
 	border-radius: 8px;
 	min-width: 400px;
