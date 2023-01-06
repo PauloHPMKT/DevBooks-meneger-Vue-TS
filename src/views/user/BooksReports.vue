@@ -17,8 +17,9 @@
 						</div>
 						<OptionsModal
 							v-if="hiddenOptionsModal && idBook === book._id"
-							@remove="removeBook"
+							@remove="callQuestionModal"
 						/>
+						<QuestionModal v-if="hiddenQuestionModal" />
 					</div>
 					<div
 						class="card-book-infomations"
@@ -75,11 +76,12 @@ import { Icon } from "@iconify/vue";
 import SearchBar from "@/components/SearchBar/index.vue";
 import FormBook from "@/components/Forms/Books/FormBook.vue";
 import OptionsModal from "@/components/Modals/OptionsModal.vue";
+import QuestionModal from "@/components/Modals/QuestionModal.vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "BooksReports",
-	components: { SearchBar, FormBook, OptionsModal, Icon },
+	components: { SearchBar, FormBook, OptionsModal, Icon, QuestionModal },
 	data() {
 		return {
 			books: this.$store.state.bookStore.Books,
@@ -90,16 +92,19 @@ export default defineComponent({
 			hiddenFormCreate: false,
 			hiddenCardBookInformations: false,
 			hiddenOptionsModal: false,
+			hiddenQuestionModal: false,
 			idBook: "",
 		};
 	},
 	methods: {
+		//metodos de requisicao
 		async getAllBooks() {
 			await this.$store.dispatch("bookStore/getBooks", this.books);
 		},
 
-		removeBook() {
-			alert("teste");
+		callQuestionModal() {
+			this.hiddenQuestionModal = true;
+			this.hiddenOptionsModal = false;
 		},
 
 		searchBook(data: string) {
@@ -171,7 +176,7 @@ export default defineComponent({
 			}
 
 			.icon-menu {
-				background: rgb(195, 195, 195);
+				background: rgb(206, 206, 206);
 				padding: 10px 8px;
 				border-radius: 8px;
 				font-size: 30px;
