@@ -2,14 +2,16 @@
 	display: flex;
 	max-width: 1920px;
 	margin: 0 auto;
+	margin-bottom: 20px;
+	height: 100vh;
 
 	.main-painel {
 		width: 85%;
-		padding: 10px;
+		margin: 10px;
 		min-height: 100vh;
 
 		main {
-			height: 85%;
+			height: 84%;
 		}
 	}
 }

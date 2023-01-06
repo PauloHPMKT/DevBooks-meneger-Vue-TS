@@ -190,6 +190,7 @@ export default defineComponent({
 		// funcao para o input type file
 		async onFileChange() {
 			this.active = !this.active;
+			//ajuste de tipagem
 			this.fileList = this.$refs.file.files;
 
 			const formData = new FormData();
