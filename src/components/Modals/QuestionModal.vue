@@ -1,13 +1,9 @@
 <template>
 	<div class="box-modal">
-		<p>Tem certeza que deseja salvar essa imagem como capa do livro?</p>
+		<p>{{ text_field }}</p>
 		<div class="box-btn">
-			<div>
-				<button>Sim</button>
-			</div>
-			<div>
-				<MainButton :title_btn="'Não'" @click="$emit('closeModal')" />
-			</div>
+			<MainButton :title_btn="'Sim'" @click="$emit('action')" />
+			<MainButton :title_btn="'Não'" @click="$emit('closeModal')" />
 		</div>
 	</div>
 </template>
@@ -18,8 +14,14 @@ import MainButton from "../Buttons/MainButton.vue";
 
 export default defineComponent({
 	name: "QuestionModal",
-	emits: ["actionBtn", "closeModal"],
+	emits: ["action", "closeModal"],
 	components: { MainButton },
+	props: {
+		text_field: {
+			type: String,
+			required: true,
+		},
+	},
 });
 </script>
 
