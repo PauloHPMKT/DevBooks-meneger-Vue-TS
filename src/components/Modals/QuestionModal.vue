@@ -1,15 +1,10 @@
 <template>
 	<div class="box-modal">
-		<p>
-			Tem certeza que deseja salvar essa imagem {{ file_name }} como capa do
-			livro?
-		</p>
+		<p>Tem certeza que deseja salvar essa imagem como capa do livro?</p>
 		<div class="box-btn">
-			<form @submit.prevent="$emit('actionBtn')" enctype="multipart/form-data">
-				<div>
-					<button type="submit">Sim</button>
-				</div>
-			</form>
+			<div>
+				<button>Sim</button>
+			</div>
 			<div>
 				<button @click="$emit('closeModal')">Não</button>
 			</div>
@@ -23,12 +18,12 @@ import { defineComponent } from "vue";
 export default defineComponent({
 	name: "QuestionModal",
 	emits: ["actionBtn", "closeModal"],
-	props: {
+	/*props: {
 		file_name: {
 			type: String,
 			required: true,
 		},
-	},
+	},*/
 });
 </script>
 
@@ -39,7 +34,11 @@ export default defineComponent({
 	left: 50%;
 	z-index: 2002;
 	transform: translate(-50%, -50%);
-	background: red;
+	filter: drop-shadow(-2px 2px 5px rgba(0, 0, 0, 0.082));
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	height: 150px;
 	padding: 20px;
 
 	.box-btn {
