@@ -117,7 +117,7 @@ export default defineComponent({
 		callOptionsModal(id: string) {
 			this.idBook = id;
 
-			this.hiddenOptionsModal = true;
+			this.hiddenOptionsModal = !this.hiddenOptionsModal;
 		},
 
 		openForm() {
