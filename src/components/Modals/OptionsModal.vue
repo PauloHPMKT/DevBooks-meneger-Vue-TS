@@ -27,6 +27,8 @@ export default defineComponent({
 	background: #fff;
 	position: absolute;
 	right: 3%;
+	bottom: -80px;
+	z-index: 2003;
 	border-radius: 8px;
 	filter: drop-shadow(-2px 2px 5px rgba(0, 0, 0, 0.166));
 

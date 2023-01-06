@@ -12,6 +12,13 @@
 							<h3>{{ book.title }}</h3>
 							<p>{{ book.plot }}</p>
 						</div>
+						<div class="icon-menu" @click="callOptionsModal(book._id)">
+							<Icon icon="carbon:overflow-menu-vertical" />
+						</div>
+						<OptionsModal
+							v-if="hiddenOptionsModal && idBook === book._id"
+							@remove="removeBook"
+						/>
 					</div>
 					<div
 						class="card-book-infomations"
@@ -64,13 +71,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Icon } from "@iconify/vue";
 import SearchBar from "@/components/SearchBar/index.vue";
 import FormBook from "@/components/Forms/Books/FormBook.vue";
+import OptionsModal from "@/components/Modals/OptionsModal.vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "BooksReports",
-	components: { SearchBar, FormBook },
+	components: { SearchBar, FormBook, OptionsModal, Icon },
 	data() {
 		return {
 			books: this.$store.state.bookStore.Books,
@@ -80,12 +89,17 @@ export default defineComponent({
 			imagePath: HOST_URI,
 			hiddenFormCreate: false,
 			hiddenCardBookInformations: false,
+			hiddenOptionsModal: false,
 			idBook: "",
 		};
 	},
 	methods: {
 		async getAllBooks() {
 			await this.$store.dispatch("bookStore/getBooks", this.books);
+		},
+
+		removeBook() {
+			alert("teste");
 		},
 
 		searchBook(data: string) {
@@ -98,6 +112,12 @@ export default defineComponent({
 			if (this.idBook === id && !this.hiddenCardBookInformations) {
 				this.hiddenCardBookInformations = !this.hiddenCardBookInformations;
 			}
+		},
+
+		callOptionsModal(id: string) {
+			this.idBook = id;
+
+			this.hiddenOptionsModal = true;
 		},
 
 		openForm() {
@@ -138,6 +158,9 @@ export default defineComponent({
 
 		.title-book-infomations {
 			cursor: pointer;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 
 			h3 {
 				margin-bottom: 5px;
@@ -145,6 +168,18 @@ export default defineComponent({
 
 			p {
 				font-size: 14px;
+			}
+
+			.icon-menu {
+				background: rgb(195, 195, 195);
+				padding: 10px 8px;
+				border-radius: 8px;
+				font-size: 30px;
+				transition: 0.3s ease-in-out;
+
+				&:hover {
+					background: rgb(180, 180, 180);
+				}
 			}
 		}
 
