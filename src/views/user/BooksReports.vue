@@ -127,6 +127,8 @@ export default defineComponent({
 	margin: 15px 0;
 	padding: 20px;
 	border-radius: 8px;
+	overflow-y: scroll;
+	height: 645px;
 
 	.card-book {
 		background-color: #d5e2fb;
