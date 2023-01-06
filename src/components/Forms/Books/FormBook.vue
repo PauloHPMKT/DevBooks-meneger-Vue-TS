@@ -102,7 +102,11 @@
 			</form>
 			<div>
 				<form name="image" enctype="multipart/form-data">
+					<div v-if="imageRender" class="viewarea-cover">
+						<img :src="`${imagePath}/${imageRender}`" alt="current cover" />
+					</div>
 					<div
+						v-else
 						@dragenter.prevent="toggleActive"
 						@dragleave.prevent="toggleActive"
 						@dragover.prevent
@@ -153,6 +157,7 @@ import BaseInput from "@/components/Inputs/BaseInput.vue";
 import MainButton from "@/components/Buttons/MainButton.vue";
 import QuestionModal from "@/components/Modals/QuestionModal.vue";
 import uploadService from "@/services/uploadService";
+const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "FormBook",
@@ -162,11 +167,13 @@ export default defineComponent({
 		return {
 			book: {} as IBookFields,
 			authors: this.$store.state.authorStore.authors,
-			//dropzoneFile: {} as any,
 			fileList: [] as any,
 			label_text: "Selecione seu arquivo",
 			active: false,
 			hiddenQuestionModal: false,
+			imagePath: HOST_URI,
+			imageRender: "",
+			idImageRender: "",
 		};
 	},
 
@@ -200,7 +207,11 @@ export default defineComponent({
 						"Content-Type": "multipart/form-data",
 					},
 				})
-				.then((res) => console.log(res));
+				.then((res) => {
+					this.imageRender = res.data.image_cover;
+					this.idImageRender = res.data._id;
+					console.log(this.idImageRender);
+				});
 		},
 
 		//repassar valor do  input file para this.book e submeter | capturar por id
@@ -211,6 +222,7 @@ export default defineComponent({
 				cod: Number(book.cod),
 				pages_number: Number(book.pages_number),
 				year: Number(book.year),
+				poster: this.idImageRender,
 			};
 
 			console.log(createBook);
@@ -304,6 +316,15 @@ export default defineComponent({
 						}
 					}
 				}
+			}
+		}
+
+		.viewarea-cover {
+			height: 250px;
+			width: 200px;
+
+			img {
+				width: 100%;
 			}
 		}
 
