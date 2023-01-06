@@ -93,6 +93,13 @@
 									placeholder="Genero do livro"
 								/>
 							</div>
+							<div class="m-bottom">
+								<BaseInput
+									class="input-styles"
+									v-model="book.publishing"
+									placeholder="Editora"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -152,6 +159,7 @@ import BaseInput from "@/components/Inputs/BaseInput.vue";
 import MainButton from "@/components/Buttons/MainButton.vue";
 import QuestionModal from "@/components/Modals/QuestionModal.vue";
 import uploadService from "@/services/uploadService";
+import bookService from "@/services/bookService";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
@@ -220,8 +228,8 @@ export default defineComponent({
 				year: Number(book.year),
 				poster: this.idImageRender,
 			};
-
-			console.log(createBook);
+			// implementar tratamento de erro
+			bookService.createBook(createBook).then((res) => console.log(res));
 		},
 	},
 });
