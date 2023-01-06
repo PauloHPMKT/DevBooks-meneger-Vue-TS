@@ -19,7 +19,10 @@
 							v-if="hiddenOptionsModal && idBook === book._id"
 							@remove="callQuestionModal"
 						/>
-						<QuestionModal v-if="hiddenQuestionModal" />
+						<QuestionModal
+							v-if="hiddenQuestionModal"
+							@closeModal="closeQuestionModal"
+						/>
 					</div>
 					<div
 						class="card-book-infomations"
@@ -107,6 +110,10 @@ export default defineComponent({
 			this.hiddenOptionsModal = false;
 		},
 
+		closeQuestionModal() {
+			this.hiddenQuestionModal = false;
+		},
+
 		searchBook(data: string) {
 			console.log(data);
 		},
@@ -183,7 +190,7 @@ export default defineComponent({
 				transition: 0.3s ease-in-out;
 
 				&:hover {
-					background: rgb(180, 180, 180);
+					background: rgb(152, 152, 152);
 				}
 			}
 		}
