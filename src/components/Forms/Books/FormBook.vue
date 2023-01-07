@@ -8,7 +8,7 @@
 			</p>
 		</div>
 		<div class="forms">
-			<form @submit.prevent="submitNewBook">
+			<form @submit.prevent="$emit('submitForm', book)">
 				<div class="form-setup">
 					<div class="inputs-fields">
 						<div>
@@ -109,46 +109,39 @@
 				</div>
 			</form>
 			<div>
-				<form name="image" enctype="multipart/form-data">
-					<!--implementar modal hover para remover a imagem do banco-->
-					<div v-if="imageRender" class="viewarea-cover">
-						<img :src="`${imagePath}/${imageRender}`" alt="current cover" />
-					</div>
-					<div
-						v-else
-						@dragenter.prevent="toggleActive"
-						@dragleave.prevent="toggleActive"
-						@dragover.prevent
-						@drop.prevent="dropFile"
-						:class="{ 'active-dropzone': active }"
-						class="dropzone"
+				<!--implementar modal hover para remover a imagem do banco-->
+				<div v-if="imageRender" class="viewarea-cover">
+					<img :src="`${imagePath}/${imageRender}`" alt="current cover" />
+				</div>
+				<div
+					v-else
+					@dragenter.prevent="toggleActive"
+					@dragleave.prevent="toggleActive"
+					@dragover.prevent
+					@drop.prevent="dropFile"
+					:class="{ 'active-dropzone': active }"
+					class="dropzone"
+				>
+					<span>Arraste e solte uma imagem</span>
+					<span>ou</span>
+					<label
+						for="dropzoneFile"
+						v-if="
+							active === true ? (label_text = `${fileList.name}`) : label_text
+						"
+						>{{ label_text }}</label
 					>
-						<span>Arraste e solte uma imagem</span>
-						<span>ou</span>
-						<label
-							for="dropzoneFile"
-							v-if="
-								active === true ? (label_text = `${fileList.name}`) : label_text
-							"
-							>{{ label_text }}</label
-						>
-						<input
-							type="file"
-							id="dropzoneFile"
-							@change="onFileChange"
-							ref="file"
-							name="image"
-						/>
-					</div>
-				</form>
+					<input
+						v-bind="$attrs"
+						type="file"
+						id="dropzoneFile"
+						@change="onFileChange"
+						ref="file"
+						name="image"
+					/>
+				</div>
 			</div>
 		</div>
-		<!--<QuestionModal
-			:file_name="label_text"
-			@actionBtn="uploadImage"
-			@closeModal="closeQuestionModal"
-			v-if="hiddenQuestionModal"
-		/>-->
 	</div>
 </template>
 
@@ -160,24 +153,22 @@ import BaseInput from "@/components/Inputs/BaseInput.vue";
 import MainButton from "@/components/Buttons/MainButton.vue";
 import QuestionModal from "@/components/Modals/QuestionModal.vue";
 import uploadService from "@/services/uploadService";
-import bookService from "@/services/bookService";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "FormBook",
 	components: { Icon, BaseInput, MainButton, QuestionModal },
-	emits: ["hiddenForm"],
+	emits: ["hiddenForm", "submitForm", "onFileChange"],
 	data() {
 		return {
 			book: {} as IBookFields,
 			authors: this.$store.state.authorStore.authors,
 			fileList: [] as any,
 			label_text: "Selecione seu arquivo",
-			active: false,
-			hiddenQuestionModal: false,
 			imagePath: HOST_URI,
 			imageRender: "",
 			idImageRender: "",
+			active: false,
 		};
 	},
 
@@ -193,7 +184,7 @@ export default defineComponent({
 		},*/
 
 		async dropFile(e: DragEvent) {
-			this.hiddenQuestionModal = true;
+			console.log(e);
 		},
 
 		// funcao para o input type file
@@ -206,31 +197,8 @@ export default defineComponent({
 
 			formData.append("image", this.fileList[0]);
 
-			uploadService
-				.uploadImage(formData, {
-					headers: {
-						"Content-Type": "multipart/form-data",
-					},
-				})
-				.then((res) => {
-					this.imageRender = res.data.image_cover;
-					this.idImageRender = res.data._id;
-					console.log(this.idImageRender);
-				});
-		},
-
-		//repassar valor do  input file para this.book e submeter | capturar por id
-		submitNewBook() {
-			const { ...book } = this.book;
-			const createBook = {
-				...book,
-				cod: Number(book.cod),
-				pages_number: Number(book.pages_number),
-				year: Number(book.year),
-				poster: this.idImageRender,
-			};
-			// implementar tratamento de erro
-			bookService.createBook(createBook).then((res) => console.log(res));
+			//realizar tratamento para repassar o current image para o dropzone
+			this.$store.dispatch("uploadStore/createUploadCover", formData);
 		},
 	},
 });

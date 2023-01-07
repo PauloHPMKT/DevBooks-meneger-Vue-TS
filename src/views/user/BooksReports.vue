@@ -2,13 +2,20 @@
 	<div class="overview">
 		<!-- Definir um escopo de click out target para fechar o form -->
 		<StatusModal
-			:status_message="'Frase'"
+			:status_message="message"
 			:class="{ isModalActive: isActive, hasError: isError }"
 		/>
 		<div ref="formCreateBook">
 			<SearchBar @search="searchBook" @open-form="openForm" />
 			<!-- Forms components -->
-			<FormBook v-if="hiddenFormCreate" @hiddenForm="closeForm" />
+			<FormBook
+				v-if="hiddenFormCreate"
+				@hiddenForm="closeForm"
+				@submitForm="createBook"
+				:imageRender="imageRender"
+				ref="file"
+				name="image"
+			/>
 			<ul class="table-books">
 				<li v-for="book in books" :key="book._id" class="card-book">
 					<div class="title-book-infomations">
@@ -82,12 +89,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Icon } from "@iconify/vue";
+import type { IBookFields } from "@/interfaces/Ibooks";
 import SearchBar from "@/components/SearchBar/index.vue";
 import StatusModal from "@/components/Modals/StatusModal.vue";
 import FormBook from "@/components/Forms/Books/FormBook.vue";
 import OptionsModal from "@/components/Modals/OptionsModal.vue";
 import QuestionModal from "@/components/Modals/QuestionModal.vue";
 import bookService from "@/services/bookService";
+import uploadService from "@/services/uploadService";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
@@ -114,9 +123,26 @@ export default defineComponent({
 			isActive: false,
 			isError: false,
 			idBook: "",
+			message: "",
+			imageRender: "",
+			idImageRender: "",
 		};
 	},
 	methods: {
+		//criar livro
+		//possibilidades de trazer a imagem... criando estado vuex || trazendo por props
+		async createBook(book: IBookFields) {
+			const { ...data } = book;
+			const bookData = {
+				...data,
+				cod: Number(data.cod),
+				pages_number: Number(data.pages_number),
+				year: Number(data.year),
+			};
+
+			console.log(bookData);
+		},
+
 		//metodos de requisicao
 		async getAllBooks() {
 			await this.$store.dispatch("bookStore/getBooks", this.books);
@@ -127,10 +153,16 @@ export default defineComponent({
 			await bookService.removeBook(id).then((res) => {
 				if (res.status === 204) {
 					this.isActive = true;
-					setTimeout(() => (this.isActive = false), 2000);
+					setTimeout(() => {
+						this.isActive = false;
+						this.message = "Livro excluído com sucesso!";
+					}, 2000);
 				} else {
 					this.isError = true;
-					setTimeout(() => (this.isError = false), 2000);
+					setTimeout(() => {
+						this.isError = false;
+						this.message = "Houve algum erro!";
+					}, 2000);
 				}
 				let index = this.books.indexOf(book);
 				this.books.splice(index, 1);
