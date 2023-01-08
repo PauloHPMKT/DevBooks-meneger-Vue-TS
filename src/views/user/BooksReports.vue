@@ -16,7 +16,7 @@
 				ref="file"
 				name="image"
 			/>
-			<ul class="table-books">
+			<ul class="table">
 				<li v-for="book in books" :key="book._id" class="card-book">
 					<div class="title-book-infomations">
 						<div @click="hiddenCardBook(book._id)">
