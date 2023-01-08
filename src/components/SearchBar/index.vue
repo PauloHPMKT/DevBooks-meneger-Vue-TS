@@ -9,12 +9,9 @@
 		</div>
 		<div class="btn-container">
 			<form @submit.prevent="$emit('search', search_data)">
-				<MainButton type="submit" :title_btn="'Pesquisar livro'" />
+				<MainButton type="submit" :title_btn="search_name" />
 			</form>
-			<MainButton
-				@click="$emit('openForm')"
-				:title_btn="'Adicionar novo livro'"
-			/>
+			<MainButton @click="$emit('openForm')" :title_btn="event_name" />
 		</div>
 	</div>
 </template>
@@ -28,6 +25,16 @@ export default defineComponent({
 	name: "SearchBar",
 	components: { BaseInput, MainButton },
 	emits: ["search", "openForm"],
+	props: {
+		search_name: {
+			type: String,
+			required: true,
+		},
+		event_name: {
+			type: String,
+			required: true,
+		},
+	},
 	data() {
 		return {
 			search_data: "",
