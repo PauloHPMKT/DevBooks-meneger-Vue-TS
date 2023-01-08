@@ -17,20 +17,23 @@
 					{{ new Date(user.createdAt).toLocaleString().slice(0, 10) }}
 				</p>
 			</div>
-			<div class="icon-menu">
-				<Icon icon="carbon:overflow-menu-vertical" />
-			</div>
+			<DetailsMenu :title="message" />
 		</div>
 	</li>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Icon } from "@iconify/vue";
+import DetailsMenu from "@/components/Icons/DetailsMenu.vue";
 
 export default defineComponent({
 	name: "CardUserList",
-	components: { Icon },
+	components: { DetailsMenu },
+	data() {
+		return {
+			message: "Clique aqui para ver detalhes do usuário",
+		};
+	},
 	props: {
 		user_state: {
 			type: Object,
