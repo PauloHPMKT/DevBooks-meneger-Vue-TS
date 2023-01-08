@@ -1,6 +1,9 @@
 <template>
 	<div class="overview">
-		<SearchBar />
+		<SearchBar
+			:search_name="'Encontre um usuário'"
+			:event_name="'Cadastrar novo usuário'"
+		/>
 		<ul class="table"></ul>
 	</div>
 </template>
