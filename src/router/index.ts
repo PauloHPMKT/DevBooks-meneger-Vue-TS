@@ -1,5 +1,18 @@
-import { createRouter, createWebHistory } from "vue-router";
-import { authGuard } from "./router-middleware";
+import {
+	type RouteLocation,
+	type NavigationGuardNext,
+	createRouter,
+	createWebHistory,
+} from "vue-router";
+
+const authGuard =
+	() => (to: RouteLocation, from: RouteLocation, next: NavigationGuardNext) => {
+		if (localStorage.getItem("token") || "") {
+			next();
+		} else {
+			next("/");
+		}
+	};
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
