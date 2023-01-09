@@ -151,7 +151,7 @@ export default defineComponent({
 					localStorage.removeItem("image_id");
 				}
 
-				console.log(res.data);
+				//testar dar um push no array
 			});
 		},
 
