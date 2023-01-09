@@ -6,7 +6,12 @@
 			:class="{ isModalActive: isActive, hasError: isError }"
 		/>
 		<div ref="formCreateBook">
-			<SearchBar @search="searchBook" @open-form="openForm" />
+			<SearchBar
+				:search_name="'Encontre um livro'"
+				:event_name="'Adicionar novo livro'"
+				@search="searchBook"
+				@open-form="openForm"
+			/>
 			<!-- Forms components -->
 			<FormBook
 				v-if="hiddenFormCreate"
@@ -23,9 +28,7 @@
 							<h3>{{ book.title }}</h3>
 							<p>{{ book.plot }}</p>
 						</div>
-						<div class="icon-menu" @click="callOptionsModal(book._id)">
-							<Icon icon="carbon:overflow-menu-vertical" />
-						</div>
+						<DetailsMenu @action="callOptionsModal(book._id)" />
 						<OptionsModal
 							v-if="hiddenOptionsModal && idBook === book._id"
 							@remove="callQuestionModal(book._id)"
@@ -97,6 +100,7 @@ import OptionsModal from "@/components/Modals/OptionsModal.vue";
 import QuestionModal from "@/components/Modals/QuestionModal.vue";
 import bookService from "@/services/bookService";
 import uploadService from "@/services/uploadService";
+import DetailsMenu from "@/components/Icons/DetailsMenu.vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
@@ -108,6 +112,7 @@ export default defineComponent({
 		Icon,
 		QuestionModal,
 		StatusModal,
+		DetailsMenu,
 	},
 	data() {
 		return {
@@ -132,6 +137,7 @@ export default defineComponent({
 		//criar livro
 		//possibilidades de trazer a imagem... criando estado vuex || trazendo por props
 		async createBook(book: IBookFields) {
+			const imageState = this.$store.state;
 			const { ...data } = book;
 			const bookData = {
 				...data,
@@ -141,6 +147,7 @@ export default defineComponent({
 			};
 
 			console.log(bookData);
+			console.log(imageState);
 		},
 
 		//metodos de requisicao
@@ -225,81 +232,72 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.table-books {
-	background-color: #fff;
-	margin: 15px 0;
-	padding: 20px;
+.card-book {
+	background-color: #d5e2fb;
+	padding: 25px 20px 20px 20px;
+	margin-bottom: 5px;
 	border-radius: 8px;
-	overflow-y: scroll;
-	height: 645px;
 
-	.card-book {
-		background-color: #d5e2fb;
-		padding: 25px 20px 20px 20px;
-		margin-bottom: 5px;
+	.title-book-infomations {
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		h3 {
+			margin-bottom: 5px;
+		}
+
+		p {
+			font-size: 14px;
+		}
+
+		.icon-menu {
+			background: rgb(206, 206, 206);
+			padding: 10px 8px;
+			border-radius: 8px;
+			font-size: 30px;
+			transition: 0.3s ease-in-out;
+
+			&:hover {
+				background: rgb(152, 152, 152);
+			}
+		}
+	}
+
+	.card-book-infomations {
+		background-color: #fff;
+		padding: 10px;
+		margin-top: 25px;
 		border-radius: 8px;
+		display: flex;
 
-		.title-book-infomations {
-			cursor: pointer;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+		.poster-container {
+			width: 20%;
 
-			h3 {
-				margin-bottom: 5px;
-			}
-
-			p {
-				font-size: 14px;
-			}
-
-			.icon-menu {
-				background: rgb(206, 206, 206);
-				padding: 10px 8px;
-				border-radius: 8px;
-				font-size: 30px;
-				transition: 0.3s ease-in-out;
-
-				&:hover {
-					background: rgb(152, 152, 152);
-				}
+			img {
+				width: 100%;
 			}
 		}
 
-		.card-book-infomations {
-			background-color: #fff;
-			padding: 10px;
-			margin-top: 25px;
-			border-radius: 8px;
-			display: flex;
+		.book-informations {
+			width: 80%;
+			padding: 0 20% 0 30px;
 
-			.poster-container {
-				width: 20%;
-
-				img {
-					width: 100%;
-				}
+			h5 {
+				font-size: 20px;
+				margin-bottom: 15px;
 			}
 
-			.book-informations {
-				width: 80%;
-				padding: 0 20% 0 30px;
+			.book-technical-informations {
+				display: flex;
+				margin-top: 30px;
 
-				h5 {
-					font-size: 20px;
-					margin-bottom: 15px;
-				}
+				.technics-dispatches {
+					width: 33.3%;
 
-				.book-technical-informations {
-					display: flex;
-					margin-top: 30px;
-
-					.technics-dispatches {
-						width: 33.3%;
-
-						> p {
-							margin-bottom: 5px;
-						}
+					> p {
+						margin-bottom: 5px;
 					}
 				}
 			}
