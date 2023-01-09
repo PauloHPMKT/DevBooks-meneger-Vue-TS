@@ -3,7 +3,7 @@
 		<!--testar a implementacao de avatar para o usuario-->
 		<div class="table-list-informations">
 			<div class="avatar-table">
-				<span>A</span>
+				<span>{{ user.name.substring(0, 1) }}</span>
 			</div>
 			<div class="table-size">
 				<h3>{{ user.name }}</h3>
@@ -17,7 +17,13 @@
 					{{ new Date(user.createdAt).toLocaleString().slice(0, 10) }}
 				</p>
 			</div>
-			<DetailsMenu :title="message" />
+			<DetailsMenu :title="message" @action="openCardUser(user._id)" />
+			<CardUser
+				:user_email="user.email"
+				:user_name="user.name"
+				v-if="hiddenCardUser && userId === user._id"
+				@hiddenCard="closeCardUser"
+			/>
 		</div>
 	</li>
 </template>
@@ -25,18 +31,32 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import DetailsMenu from "@/components/Icons/DetailsMenu.vue";
+import CardUser from "./CardUser.vue";
 
 export default defineComponent({
 	name: "CardUserList",
-	components: { DetailsMenu },
+	components: { DetailsMenu, CardUser },
 	data() {
 		return {
 			message: "Clique aqui para ver detalhes do usuário",
+			userId: "",
+			hiddenCardUser: false,
 		};
 	},
 	props: {
 		user_state: {
 			type: Object,
+		},
+	},
+	methods: {
+		openCardUser(id: string) {
+			this.userId = id;
+
+			this.hiddenCardUser = !this.hiddenCardUser;
+		},
+
+		closeCardUser() {
+			this.hiddenCardUser = false;
 		},
 	},
 });
