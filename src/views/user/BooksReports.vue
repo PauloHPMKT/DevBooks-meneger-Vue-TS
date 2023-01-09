@@ -137,17 +137,22 @@ export default defineComponent({
 		//criar livro
 		//possibilidades de trazer a imagem... criando estado vuex || trazendo por props
 		async createBook(book: IBookFields) {
-			const imageState = this.$store.state;
 			const { ...data } = book;
 			const bookData = {
 				...data,
 				cod: Number(data.cod),
 				pages_number: Number(data.pages_number),
 				year: Number(data.year),
+				poster: (data.poster = `${localStorage.getItem("image_id")}`),
 			};
 
-			console.log(bookData);
-			console.log(imageState);
+			await bookService.createBook(bookData).then((res) => {
+				if (res.status === 201) {
+					localStorage.removeItem("image_id");
+				}
+
+				console.log(res.data);
+			});
 		},
 
 		//metodos de requisicao
