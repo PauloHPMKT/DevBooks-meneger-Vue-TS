@@ -17,7 +17,7 @@
 		</div>
 		<div class="header__infos--commands">
 			<div @click="isCardActive" :title="user_message" ref="profileCard">
-				<span>L</span>
+				<span>{{ $store.state.userStore.userName.substring(0, 1) }}</span>
 			</div>
 			<ProfileCard
 				@hiddenProfileCard="hiddenCard"
