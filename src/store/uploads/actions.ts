@@ -9,8 +9,11 @@ export default {
 				},
 			})
 			.then((res) => {
-				console.log(res);
-				//verificar se consigo mandar o id para o book.poster
+				const uploadedImageId = res.data._id;
+				//salva id da imagem na storage para que o formulário colete
+				localStorage.setItem("image_id", uploadedImageId);
+
+				commit("GET_UPLOADS", res.data);
 			});
 	},
 };
