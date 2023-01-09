@@ -188,7 +188,7 @@ export default defineComponent({
 		},
 
 		// funcao para o input type file
-		async onFileChange() {
+		async onFileChange(): Promise<void> {
 			this.active = !this.active;
 			//ajuste de tipagem
 			this.fileList = this.$refs.file.files;
@@ -198,7 +198,7 @@ export default defineComponent({
 			formData.append("image", this.fileList[0]);
 
 			//realizar tratamento para repassar o current image para o dropzone
-			this.$store.dispatch("uploadStore/createUploadCover", formData);
+			await this.$store.dispatch("uploadStore/createUploadCover", formData);
 		},
 	},
 });
