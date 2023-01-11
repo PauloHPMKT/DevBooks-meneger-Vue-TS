@@ -12,7 +12,7 @@ export default {
 		await userServices.getPaginatedUsers().then((res) => {
 			console.log(res.data);
 
-			commit("GET_PAGINATED_USERS", res.data.findUserQuery);
+			commit("GET_PAGINATED_USERS", res.data);
 		});
 	},
 

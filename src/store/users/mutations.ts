@@ -4,7 +4,8 @@ export default {
 	},
 
 	GET_PAGINATED_USERS(state: any, payload: any) {
-		state.Users = payload;
+		state.Users = payload.findUserQuery;
+		state.countUsers = payload.count;
 	},
 
 	REMOVE_USER(state: any, payload: any) {

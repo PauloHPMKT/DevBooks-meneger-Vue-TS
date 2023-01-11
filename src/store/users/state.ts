@@ -1,6 +1,6 @@
 export default {
 	Users: [],
-	User: {},
+	countUsers: Number,
 	userName: "",
 	userEmail: "",
 	userId: "",
