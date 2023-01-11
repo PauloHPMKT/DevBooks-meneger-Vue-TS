@@ -4,10 +4,10 @@
 			:search_name="'Encontre um usuário'"
 			:event_name="'Cadastrar novo usuário'"
 		/>
-		<ul class="table">
-			<CardUserList :user_state="users" />
-		</ul>
-		<div>
+		<div class="table">
+			<ul>
+				<CardUserList :user_state="users" />
+			</ul>
 			<Pagination
 				:totalPages="10"
 				:perPage="10"
@@ -36,6 +36,8 @@ export default defineComponent({
 		return {
 			users: this.$store.state.userStore.Users,
 			currentPage: 1,
+			page: "",
+			limit: "",
 		};
 	},
 
