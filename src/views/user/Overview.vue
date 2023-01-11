@@ -24,8 +24,24 @@
 		</header>
 		<div class="table overview_table">
 			<section>
-				<div class="size-container">conteudo 1</div>
-				<div class="size-container">conteudo 2</div>
+				<div class="size-container">
+					<div class="board-info">
+						<div class="introduction">
+							<span>Plaraforma de gerenciamento de recursos</span>
+							<h1>Gerenciador DevBooks</h1>
+							<p>
+								<strong>Conhece a DevBooks?</strong>
+								O DevBooks é uma plataforma / rede social voltada para o público
+								bibliófilo. E por aqui é possível conhecer outros usuários,
+								indicar livros, comentar e até mesmo salvar na sua estante.
+								Legal não é mesmo? Então junte-se a nós!
+							</p>
+						</div>
+						<div class="tag">
+							<WeatherWidget />
+						</div>
+					</div>
+				</div>
 				<div class="size-container book-card">
 					<div class="cover">
 						<img
@@ -61,11 +77,12 @@
 import { defineComponent } from "vue";
 import CardMessure from "@/components/DashboardComponents/CardMessure.vue";
 import { Icon } from "@iconify/vue";
+import WeatherWidget from "@/assets/sass/components/Widget/WeatherWidget.vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
 	name: "Overview",
-	components: { CardMessure, Icon },
+	components: { CardMessure, Icon, WeatherWidget },
 	data() {
 		return {
 			imagePath: HOST_URI,
