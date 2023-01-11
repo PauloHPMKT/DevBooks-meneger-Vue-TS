@@ -1,17 +1,17 @@
 <template>
 	<ul class="pagination">
-		<li class="paginatio-item">
-			<button>First</button>
+		<li class="pagination-item">
+			<button>Primeiro</button>
 		</li>
 		<!-- Visible Buttons Start -->
-		<li class="paginatio-item">
+		<li class="pagination-item">
 			<button @click="onClickFirstPage" :disabled="isInFirstPage">
-				Previous
+				Anterior
 			</button>
 		</li>
 
 		<!-- ... -->
-		<li v-for="page in pages" :key="page.name" class="paginatio-item">
+		<li v-for="page in pages" :key="page.name" class="pagination-item">
 			<button
 				type="button"
 				@click="onClickPage(page.name)"
@@ -23,13 +23,13 @@
 		</li>
 
 		<!-- Visible Buttons End -->
-		<li class="paginatio-item">
+		<li class="pagination-item">
 			<button @click="onClickPreviousPage" :disabled="isInFirstPage">
-				Next
+				Próximo
 			</button>
 		</li>
-		<li class="paginatio-item">
-			<button>Last</button>
+		<li class="pagination-item">
+			<button>Último</button>
 		</li>
 	</ul>
 </template>
@@ -128,13 +128,30 @@ export default defineComponent({
 <style scoped lang="scss">
 .pagination {
 	list-style-type: none;
-	.pagination-item {
-		display: inline-block;
-	}
-}
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px 10px;
 
-.active {
-	background-color: #4aae9b;
-	color: #ffffff;
+	.pagination-item {
+		button {
+			padding: 10px;
+			cursor: pointer;
+			border-radius: 8px;
+			border: none;
+			color: #009acc;
+			font-size: 16px;
+
+			&:active {
+				background-color: #343a63;
+				color: #ffffff;
+			}
+		}
+	}
+
+	.active {
+		background-color: #343a63;
+		color: #ffffff;
+	}
 }
 </style>
