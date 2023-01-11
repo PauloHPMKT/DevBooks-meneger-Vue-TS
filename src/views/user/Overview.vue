@@ -34,12 +34,10 @@ export default defineComponent({
 	components: { CardMessure },
 	data() {
 		return {
-			quantityUser: 290,
+			quantityUser: this.$store.state.userStore.countUsers,
 			quantityBooks: 476,
 			quantityComments: 851,
 		};
 	},
-
-	mounted() {},
 });
 </script>
