@@ -32,6 +32,7 @@ export default defineComponent({
 	z-index: 2006;
 	min-width: 300px;
 	min-height: 80px;
+	color: #fff;
 }
 
 .isModalActive {

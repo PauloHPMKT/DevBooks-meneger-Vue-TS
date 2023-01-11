@@ -3,7 +3,8 @@
 		<!--testar a implementacao de avatar para o usuario-->
 		<div class="table-list-informations">
 			<div class="avatar-table">
-				<span>{{ user.name.substring(0, 1) }}</span>
+				<span>L</span>
+				<!--<span>{{ (substring_letter = `${user.name.substring(0, 1)}`) }}</span>-->
 			</div>
 			<div class="table-size">
 				<h3>{{ user.name }}</h3>
@@ -21,6 +22,7 @@
 			<CardUser
 				:user_email="user.email"
 				:user_name="user.name"
+				:user_id="user._id"
 				v-if="hiddenCardUser && userId === user._id"
 				@hiddenCard="closeCardUser"
 			/>
@@ -40,6 +42,7 @@ export default defineComponent({
 		return {
 			message: "Clique aqui para ver detalhes do usuário",
 			userId: "",
+			substring_letter: "",
 			hiddenCardUser: false,
 		};
 	},

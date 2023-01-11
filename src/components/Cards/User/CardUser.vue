@@ -13,7 +13,10 @@
 			</div>
 			<div>
 				<MainButton :title_btn="'Editar Usuário'" />
-				<MainButton :title_btn="'Remover Usuário'" />
+				<MainButton
+					:title_btn="'Remover Usuário'"
+					@click="removeUser(user_id)"
+				/>
 			</div>
 		</div>
 	</div>
@@ -23,6 +26,7 @@
 import { defineComponent } from "vue";
 import { Icon } from "@iconify/vue";
 import MainButton from "@/components/Buttons/MainButton.vue";
+import userServices from "@/services/userServices";
 
 export default defineComponent({
 	name: "CardUser",
@@ -36,6 +40,22 @@ export default defineComponent({
 		user_email: {
 			type: String,
 			required: true,
+		},
+		user_id: {
+			type: String,
+		},
+	},
+	data() {
+		return {
+			id: this.user_id,
+		};
+	},
+
+	methods: {
+		async removeUser(id: string | undefined) {
+			await this.$store.dispatch("userStore/removeUser", id).then(() => {
+				console.log("resposta");
+			});
 		},
 	},
 });
