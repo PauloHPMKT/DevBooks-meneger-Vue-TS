@@ -22,6 +22,7 @@
 				:quantity="305"
 			/>
 		</header>
+		<div></div>
 	</div>
 </template>
 
