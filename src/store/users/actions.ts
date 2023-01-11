@@ -8,6 +8,18 @@ export default {
 		});
 	},
 
+	async getAllPaginatedUsers({ commit }: any) {
+		await userServices.getPaginatedUsers().then((res) => {
+			console.log(res.data);
+
+			commit("GET_PAGINATED_USERS", res.data.findUserQuery);
+		});
+	},
+
+	async removeUser({ commit }: any, data: any) {
+		await userServices.removeUser(data);
+	},
+
 	async login(context: any, data: object) {
 		await userServices.login(data).then((res) => {
 			const validToken = res.data.token;
