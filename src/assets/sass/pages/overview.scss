@@ -16,15 +16,34 @@
 			@include alignment-items(flex, unset, uset);
 
 			.size-container {
-				width: 50%;
+				width: 65%;
 				border-radius: 8px;
 				margin-right: 10px;
 				height: 250px;
 				// provisorio
 				background-color: #fff;
 
-				&:nth-child(2) {
-					margin: 0 10px;
+				&:last-child {
+					width: 35%;
+				}
+
+				.board-info {
+					padding: 20px;
+					border-radius: 8px;
+					display: flex;
+					height: 100%;
+
+					.introduction {
+						width: 60%;
+
+						span {
+							font-weight: 500;
+						}
+
+						h1 {
+							margin: 15px 0 30px;
+						}
+					}
 				}
 			}
 
@@ -44,8 +63,8 @@
 					position: absolute;
 
 					img {
-						height: 265%;
-						width: 105%;
+						height: 270%;
+						width: 110%;
 						border: 1px solid;
 						animation: jump 0.6s ease-in-out;
 
