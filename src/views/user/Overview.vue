@@ -37,9 +37,7 @@
 								Legal não é mesmo? Então junte-se a nós!
 							</p>
 						</div>
-						<div class="tag">
-							<WeatherWidget />
-						</div>
+						<WeatherWidget />
 					</div>
 				</div>
 				<div class="size-container book-card">
@@ -77,7 +75,7 @@
 import { defineComponent } from "vue";
 import CardMessure from "@/components/DashboardComponents/CardMessure.vue";
 import { Icon } from "@iconify/vue";
-import WeatherWidget from "@/assets/sass/components/Widget/WeatherWidget.vue";
+import WeatherWidget from "@/components/Widget/WeatherWidget.vue";
 const HOST_URI = import.meta.env.VITE_HOST_URI;
 
 export default defineComponent({
