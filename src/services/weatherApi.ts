@@ -9,6 +9,8 @@ const city = "Fortaleza";
 
 export default {
 	getWeatherResults: () => {
-		return ApiWeather.get(`q=${city}&units=metric&appid=${API_KEY}&lang=pt_BR`);
+		return ApiWeather.get(
+			`weather?q=${city}&units=metric&appid=${API_KEY}&lang=pt_BR`
+		); //lat=${lat}&lon=${lng}&appid=${API_KEY}&lang=pt_BR``);
 	},
 };

@@ -11,5 +11,5 @@ export const ApiService: AxiosInstance = axios.create({
 });
 
 export const ApiWeather: AxiosInstance = axios.create({
-	baseURL: "https://api.openweathermap.org/data/2.5/weather?",
+	baseURL: "https://api.openweathermap.org/data/2.5/",
 });

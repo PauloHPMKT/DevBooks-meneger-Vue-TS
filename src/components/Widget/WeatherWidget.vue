@@ -10,13 +10,20 @@
 		<span>{{ day_period }}</span>
 		<div class="date_time">{{ date_time }}</div>
 		<div class="weather">
-			<span>28 °C</span>
-			<p>Maranguape</p>
+			<div>
+				<span>{{ api.temp }} °C</span>
+				<p>Maranguape</p>
+			</div>
+			<div class="temp-status">
+				<p>{{ api.weather_description }}</p>
+				<Icon :icon="`carbon:${api.temp_icon}`" />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
+import { Icon } from "@iconify/vue";
 import { defineComponent } from "vue";
 import weatherApi from "../../services/weatherApi";
 
@@ -26,6 +33,11 @@ export default defineComponent({
 		return {
 			day_period: "",
 			date_time: "",
+			api: {
+				temp: 0,
+				weather_description: "",
+				temp_icon: "",
+			},
 			nightStage: false,
 			afternoonStage: false,
 			dayStage: false,
@@ -34,10 +46,18 @@ export default defineComponent({
 	methods: {
 		async weatherRequest() {
 			await weatherApi.getWeatherResults().then((res) => {
-				console.log(res);
+				console.log(res.data);
+
+				this.api.temp = Math.trunc(res.data.main.temp);
+
+				//info cards weather events
+				const weatherDescription = res.data.weather[0].main;
+				this.api.weather_description = res.data.weather[0].description;
+				if (weatherDescription === "Clouds") {
+					this.api.temp_icon = "cloud";
+				}
 			});
 		},
-
 		clockTimer() {
 			setInterval(() => {
 				const data = new Date();
@@ -48,9 +68,7 @@ export default defineComponent({
 				]
 					.map((valor) => `0${valor}`.slice(-2))
 					.join(":");
-
 				this.date_time = currentTime;
-
 				if (currentTime >= "18:00:00" && currentTime <= "23:59:59") {
 					this.day_period = "Boa Noite";
 					this.nightStage = true;
@@ -65,8 +83,9 @@ export default defineComponent({
 	},
 	beforeMount() {
 		this.clockTimer();
-		//this.weatherRequest();
+		this.weatherRequest();
 	},
+	components: { Icon },
 });
 </script>
 
@@ -86,8 +105,26 @@ export default defineComponent({
 
 	.weather {
 		margin-top: 50px;
+		display: flex;
+
 		span {
 			font-size: 35px;
+		}
+
+		.temp-status {
+			padding-top: 3px;
+			margin-left: 30px;
+			display: flex;
+
+			flex-direction: column;
+			p {
+				margin-bottom: 3px;
+				font-size: 16px;
+			}
+
+			svg {
+				font-size: 37px;
+			}
 		}
 	}
 }
